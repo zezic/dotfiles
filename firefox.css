@@ -26,6 +26,9 @@
 .tabbrowser-tab:not([visuallyselected="true"]) .tab-label {
     color: #666666;
 }
+.tabbrowser-tab[visuallyselected="true"] .tab-content {
+    padding-top: 2px;
+}
 #new-tab-button:-moz-window-inactive, #alltabs-button:-moz-window-inactive {
     background-color: #ffffff;
 }
