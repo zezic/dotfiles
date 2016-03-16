@@ -1,0 +1,86 @@
+diff -Naur docky-2.2.1.1/Docky/Docky/Interface/DockWindow.cs docky-2.2.1.1-patched/Docky/Docky/Interface/DockWindow.cs
+--- docky-2.2.1.1/Docky/Docky/Interface/DockWindow.cs	2015-06-23 16:06:38.024601342 +0400
++++ docky-2.2.1.1-patched/Docky/Docky/Interface/DockWindow.cs	2016-02-28 18:20:16.100592959 +0400
+@@ -134,7 +134,7 @@
+ 		const int BackgroundWidth = 1000;
+ 		const int BackgroundHeight = 150;
+ 		const int NormalIndicatorSize = 20;
+-		const int UrgentIndicatorSize = 26;
++		const int UrgentIndicatorSize = 20;
+ 		const int GlowSize = 30;
+ 		
+ 		const int WaitGroups = 3;
+@@ -2479,7 +2479,7 @@
+ 						(int) (IconSize * val.Zoom) + ItemWidthBuffer, DockHeight);
+ 				
+ 				surface.Context.Operator = Operator.DestOver;
+-				DrawActiveIndicator (surface, area, item.AverageColor (), opacity);
++				// DrawActiveIndicator (surface, area, item.AverageColor (), opacity);
+ 				surface.Context.Operator = Operator.Over;
+ 			}
+ 			
+@@ -2504,10 +2504,10 @@
+ 				DockySurface indicator = (item.State & ItemState.Urgent) == ItemState.Urgent ? urgent_indicator_buffer : normal_indicator_buffer;
+ 				
+ 				if (item.Indicator == ActivityIndicator.Single || !Preferences.IndicateMultipleWindows) {
+-					indicator.ShowWithOptions (surface, loc.Center, 1, 0, 1);
++					indicator.ShowWithOptions (surface, loc.MoveIn (Position, 1).Center, 1, 0, 1);
+ 				} else {
+-					indicator.ShowWithOptions (surface, loc.MoveRight (Position, 3).Center, 1, 0, 1);
+-					indicator.ShowWithOptions (surface, loc.MoveRight (Position, -3).Center, 1, 0, 1);
++					indicator.ShowWithOptions (surface, loc.MoveRight (Position, 3).MoveIn (Position, 1).Center, 1, 0, 1);
++					indicator.ShowWithOptions (surface, loc.MoveRight (Position, -3).MoveIn (Position, 1).Center, 1, 0, 1);
+ 				}
+ 			}
+ 		}
+@@ -2588,7 +2588,7 @@
+ 											(double) gdkColor.Green / ushort.MaxValue,
+ 											(double) gdkColor.Blue / ushort.MaxValue,
+ 											1.0);
+-			return CreateIndicatorBuffer (NormalIndicatorSize, color.MinimumSaturation (0.4));
++			return CreateIndicatorBuffer (NormalIndicatorSize, color.MinimumSaturation (0.4), false);
+ 		}
+ 		
+ 		DockySurface CreateUrgentIndicatorBuffer ()
+@@ -2599,10 +2599,10 @@
+ 											(double) gdkColor.Green / ushort.MaxValue,
+ 											(double) gdkColor.Blue / ushort.MaxValue,
+ 											1.0);
+-			return CreateIndicatorBuffer (UrgentIndicatorSize, color.AddHue (DockServices.Theme.UrgentHueShift).SetSaturation (1));
++			return CreateIndicatorBuffer (UrgentIndicatorSize, color.AddHue (DockServices.Theme.UrgentHueShift).SetSaturation (1), true);
+ 		}
+ 		
+-		DockySurface CreateIndicatorBuffer (int size, Cairo.Color color)
++		DockySurface CreateIndicatorBuffer (int size, Cairo.Color color, bool is_urgent)
+ 		{
+ 			DockySurface surface = new DockySurface (size, size, background_buffer);
+ 			surface.Clear ();
+@@ -2616,12 +2616,22 @@
+ 			cr.Arc (x, y, size / 2, 0, Math.PI * 2);
+ 				
+ 			RadialGradient rg = new RadialGradient (x, y, 0, x, y, size / 2);
+-			rg.AddColorStop (0, new Cairo.Color (1, 1, 1, 1));
+-			rg.AddColorStop (.10, color.SetAlpha (1.0));
+-			rg.AddColorStop (.20, color.SetAlpha (.60));
+-			rg.AddColorStop (.25, color.SetAlpha (.25));
+-			rg.AddColorStop (.50, color.SetAlpha (.15));
+-			rg.AddColorStop (1.0, color.SetAlpha (0.0));
++			// rg.AddColorStop (0, new Cairo.Color (1, 1, 1, 1));
++			if (is_urgent) {
++				rg.AddColorStop (0, new Cairo.Color (1,1,1,1));
++				rg.AddColorStop (.18, new Cairo.Color (1,1,1,1));
++			} else {
++				rg.AddColorStop (0, new Cairo.Color (1,1,1,0.6));
++				rg.AddColorStop (.18, new Cairo.Color (1,1,1,0.6));
++			}
++			rg.AddColorStop (.27, new Cairo.Color (0,0,0,0.05));
++			rg.AddColorStop (.37, new Cairo.Color (0,0,0,0.0));
++			rg.AddColorStop (1.0, new Cairo.Color (0,0,0,0.0));
++
++			// rg.AddColorStop (.10, color.SetAlpha (1.0));
++			// rg.AddColorStop (.40, color.SetAlpha (1.0));
++			// rg.AddColorStop (.41, color.SetAlpha (0.0));
++			// rg.AddColorStop (1.0, color.SetAlpha (0.0));
+ 			
+ 			cr.Pattern = rg;
+ 			cr.Fill ();
