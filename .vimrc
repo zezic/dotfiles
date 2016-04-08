@@ -75,3 +75,6 @@ let g:airline_theme="base16"
 "
 :set ttimeoutlen=0
 set modelines=0
+set scrolloff=3
+set wildmenu
+set cursorline
