@@ -74,3 +74,4 @@ let g:airline_theme="base16"
 ":hi StatusLine ctermbg=4 ctermfg=4
 "
 :set ttimeoutlen=0
+set modelines=0
