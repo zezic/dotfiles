@@ -24,6 +24,7 @@ Plugin 'Yggdroot/indentLine'
 Plugin 'sjl/gundo.vim'
 Plugin 'tpope/vim-haml'
 Plugin 'Valloric/YouCompleteMe'
+Plugin 'scrooloose/nerdcommenter'
 Bundle 'scrooloose/nerdtree'
 
 call vundle#end()
@@ -39,6 +40,7 @@ set fillchars=vert:│
 
 map <C-n> :NERDTreeToggle<CR>
 map <C-\> :NERDTreeFocus<CR>
+map <C-_> :call NERDComment(1, 'toggle')<CR>
 
 "let g:NERDTreeDirArrowExpandable="+"
 "let g:NERDTreeDirArrowCollapsible="~"
