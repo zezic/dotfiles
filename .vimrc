@@ -78,5 +78,12 @@ set modelines=0
 set scrolloff=3
 set wildmenu
 set cursorline
+
 set ignorecase
 set smartcase
+
+set incsearch
+set showmatch
+set hlsearch
+
+nnoremap <C-f> :noh<cr>
