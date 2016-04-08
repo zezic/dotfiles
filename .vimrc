@@ -22,6 +22,8 @@ Plugin 'digitaltoad/vim-pug'
 Plugin 'fholgado/minibufexpl.vim'
 Plugin 'Yggdroot/indentLine'
 Plugin 'sjl/gundo.vim'
+Plugin 'tpope/vim-haml'
+Plugin 'Valloric/YouCompleteMe'
 Bundle 'scrooloose/nerdtree'
 
 call vundle#end()
