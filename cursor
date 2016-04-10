@@ -1,0 +1,37 @@
+ 0
+down vote
+	
+
+The following method works for me !
+
+In the following method, I use the cursor theme OpenZone_Black as an example.
+
+    Extract you downloaded theme to ～/.icons or /usr/share/icons/ (I choose /usr/share/icons/ in the example)
+
+    sudo tar -xv -f ~/Downloads/OpenZone/OpenZone_Black-1.2.3.tar.xz -C /usr/share/icons/
+
+    Copy the cursor.theme file under the system cursor theme folder(like DMZ-White) to your downloaded theme folder.
+
+      sudo cp -a /usr/share/icons/DMZ-White/cursor.theme /usr/share/icons/OpenZone_Black/
+
+        open your copied cursor.theme, and change the line to
+
+        [Icon Theme] Inherits=OpenZone_Black
+
+        Execute the following command in the same terminal at a time:
+
+            record your downloaded theme
+
+                 CURSOR=OpenZone_Black
+
+            add to alternative x-cursor-theme:
+
+                 sudo update-alternatives --install /usr/share/icons/default/index.theme x-cursor-theme /usr/share/icons/$CURSOR/cursor.theme 20
+
+            change the cursor theme
+
+                sudo update-alternatives --config x-cursor-theme  
+
+            now select the cursor theme.
+
+
