@@ -50,6 +50,9 @@ let python_highlight_all = 1
 "map <F1> :MBEbp<CR> " Prev buffer
 "map <F2> :MBEbn<CR> " Next buffer
 "map <F4> :MBEbd<CR> " Destroy buffer
+map <F1> gT
+map <F2> gt
+
 nnoremap <F5> :GundoToggle<CR>
 :let g:session_autosave = 'yes'
 :let g:session_autoload = 'no'
