@@ -52,6 +52,10 @@ let python_highlight_all = 1
 "map <F4> :MBEbd<CR> " Destroy buffer
 map <F1> gT
 map <F2> gt
+map <Esc>[1;2P <S-F1>
+map <Esc>[1;2Q <S-F2>
+map <S-F1> :tabm -1<CR>
+map <S-F2> :tabm +1<CR>
 
 nnoremap <F5> :GundoToggle<CR>
 :let g:session_autosave = 'yes'
