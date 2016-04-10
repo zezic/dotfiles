@@ -19,7 +19,7 @@ Plugin 'hdima/python-syntax'
 Plugin 'xolox/vim-misc'
 Plugin 'xolox/vim-session'
 Plugin 'digitaltoad/vim-pug'
-Plugin 'fholgado/minibufexpl.vim'
+"Plugin 'fholgado/minibufexpl.vim'
 Plugin 'Yggdroot/indentLine'
 Plugin 'sjl/gundo.vim'
 Plugin 'tpope/vim-haml'
@@ -47,9 +47,9 @@ map <C-_> :call NERDComment(1, 'toggle')<CR>
 
 let python_highlight_all = 1 
 
-map <F1> :MBEbp<CR> " Prev buffer
-map <F2> :MBEbn<CR> " Next buffer
-map <F4> :MBEbd<CR> " Destroy buffer
+"map <F1> :MBEbp<CR> " Prev buffer
+"map <F2> :MBEbn<CR> " Next buffer
+"map <F4> :MBEbd<CR> " Destroy buffer
 nnoremap <F5> :GundoToggle<CR>
 :let g:session_autosave = 'yes'
 :let g:session_autoload = 'no'
@@ -87,3 +87,7 @@ set showmatch
 set hlsearch
 
 nnoremap <C-f> :noh<cr>
+
+set ttyfast
+set mouse=a
+set ttymouse=xterm2
