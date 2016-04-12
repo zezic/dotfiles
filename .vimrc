@@ -25,6 +25,7 @@ Plugin 'sjl/gundo.vim'
 Plugin 'tpope/vim-haml'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'scrooloose/nerdcommenter'
+Plugin 'tpope/vim-surround'
 Bundle 'scrooloose/nerdtree'
 
 call vundle#end()
@@ -98,3 +99,5 @@ nnoremap <C-f> :noh<cr>
 set ttyfast
 set mouse=a
 set ttymouse=xterm2
+
+set relativenumber
