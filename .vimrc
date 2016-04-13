@@ -25,6 +25,7 @@ Plugin 'sjl/gundo.vim'
 Plugin 'tpope/vim-haml'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'scrooloose/nerdcommenter'
+Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-surround'
 Bundle 'scrooloose/nerdtree'
 
