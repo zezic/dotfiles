@@ -1,0 +1,36 @@
+[1mdiff --git a/include/compiz-core.h b/include/compiz-core.h[m
+[1mindex c4ed676..652a319 100644[m
+[1m--- a/include/compiz-core.h[m
+[1m+++ b/include/compiz-core.h[m
+[36m@@ -979,6 +979,7 @@[m [mstruct _CompDisplay {[m
+     Atom clientListStackingAtom;[m
+ [m
+     Atom frameExtentsAtom;[m
+[32m+[m[32m    Atom frameGtkExtentsAtom;[m
+     Atom frameWindowAtom;[m
+ [m
+     Atom wmStateAtom;[m
+[1mdiff --git a/src/display.c b/src/display.c[m
+[1mindex 8e16e5e..7873b16 100644[m
+[1m--- a/src/display.c[m
+[1m+++ b/src/display.c[m
+[36m@@ -2115,6 +2115,7 @@[m [maddDisplay (const char *name)[m
+ 	XInternAtom (dpy, "_NET_CLIENT_LIST_STACKING", 0);[m
+ [m
+     d->frameExtentsAtom = XInternAtom (dpy, "_NET_FRAME_EXTENTS", 0);[m
+[32m+[m[32m    d->frameGtkExtentsAtom = XInternAtom (dpy, "_GTK_FRAME_EXTENTS", 0);[m
+     d->frameWindowAtom  = XInternAtom (dpy, "_NET_FRAME_WINDOW", 0);[m
+ [m
+     d->wmStateAtom	  = XInternAtom (dpy, "WM_STATE", 0);[m
+[1mdiff --git a/src/screen.c b/src/screen.c[m
+[1mindex 443f4f0..d68d544 100644[m
+[1m--- a/src/screen.c[m
+[1m+++ b/src/screen.c[m
+[36m@@ -1234,6 +1234,7 @@[m [maddSupportedAtoms (CompScreen   *s,[m
+ [m
+     atoms[count++] = d->wmUserTimeAtom;[m
+     atoms[count++] = d->frameExtentsAtom;[m
+[32m+[m[32m    atoms[count++] = d->frameGtkExtentsAtom;[m
+     atoms[count++] = d->frameWindowAtom;[m
+ [m
+     atoms[count++] = d->winStateAtom;[m
