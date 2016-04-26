@@ -1,0 +1,116 @@
+/* AGENT_SHEET */
+/** transparent scrollbars for Firefox
+/*  http://userstyles.org/styles/84530/
+/*  update 2013-1219
+*/
+
+scrollbar, scrollcorner 
+{
+-moz-appearance: none !important; 
+background: none !important; 
+/* padding: 0 !important;  */
+border: 0 !important; 
+margin: 0 !important;
+}
+
+scrollbar[orient="vertical"]
+{
+margin-left: -10px !important;
+/* padding-right: 4px !important; */
+/* padding-top: 4px !important; */
+/* padding-bottom: 4px !important; */
+}
+scrollbar[orient="horizontal"]
+{
+margin-top: -10px !important;
+/* padding-bottom: 4px !important; */
+/* padding-left: 4px !important; */
+/* padding-right: 4px !important; */
+}
+
+scrollbar:hover thumb[orient="vertical"],
+scrollbar:hover thumb[orient="horizontal"],
+scrollbar:hover scrollbarbutton
+{ background-color: rgba(95,95,95,0.8) !important; }
+
+
+scrollbar thumb[orient="vertical"],
+textbox scrollbar thumb[orient="vertical"]
+{ -moz-appearance: none !important; 
+opacity: 1 !important;
+min-height: 30px !important;
+border: none !important; 
+border-radius: 100px; 
+background-color: rgba(95,95,95,0.2) !important;
+}
+
+scrollbar thumb[orient="horizontal"],
+textbox scrollbar thumb[orient="horizontal"]
+{ -moz-appearance: none !important; 
+min-width: 30px !important;
+opacity: 1 !important;
+border: none !important;
+border-radius: 100px;
+background-color: rgba(95,95,95,0.2) !important; 
+}
+
+scrollbar {
+  
+}
+scrollbar:hover {
+  opacity: 1;
+}
+scrollbar[orient="vertical"]
+{
+  padding: 4px 4px 4px 0px;
+min-width: 12px !important;
+max-width: 12px !important;
+}
+
+html>scrollbar[orient="vertical"]
+{
+margin-left: -12px !important;
+position: relative !important;
+z-index: 99999999 !important;
+}
+
+scrollbar[orient="horizontal"]
+{
+  padding: 0px 4px 4px;
+max-height: 12px !important;
+min-height: 12px !important; 
+}
+html>scrollbar[orient="horizontal"]
+{
+position: relative !important;
+z-index: 99999999 !important;
+}
+
+scrollbarbutton
+{ -moz-appearance: none !important;
+border: none !important;
+background: #666 !important;
+opacity: .25 !important;
+border-radius: 0;
+max-height:10px  !important;
+min-height:10px  !important;
+max-width:10px  !important;
+min-width:10px  !important;
+margin: 0px  !important;
+  display: none;
+}
+
+/**** so scrollbar won't block links, other scrollbars, etc *****/
+/* @-moz-document url-prefix(http){
+body
+{
+padding-right: 10px !important;
+max-width: calc(100% - 10px)  !important;
+}
+
+} */
+
+
+
+/* *************** end scrollbars ***************** */
+

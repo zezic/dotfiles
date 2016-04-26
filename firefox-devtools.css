@@ -1,0 +1,11 @@
+@namespace url(http://www.w3.org/1999/xhtml);
+
+@-moz-document url("chrome://browser/content/devtools/markup-view.xhtml") {
+   body {
+/*       background: #181D20 !important */
+   }
+}
+.devtools-monospace {
+   font-family: MonacoB;
+   font-size: 10px;
+}
