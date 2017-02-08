@@ -42,6 +42,7 @@ Plugin 'terryma/vim-multiple-cursors'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'davidhalter/jedi-vim'
 Bundle 'scrooloose/nerdtree'
+Plugin 'albfan/nerdtree-git-plugin'
 
 call vundle#end()
 filetype plugin indent on
@@ -161,3 +162,15 @@ let g:pymode_syntax_space_errors = g:pymode_syntax_all
 let g:pymode_folding = 0
 let g:show_call_signatures = '2'
 set omnifunc=jedi#completions
+
+let g:NERDTreeIndicatorMapCustom = {
+    \ "Modified"  : "~",
+    \ "Staged"    : "s",
+    \ "Untracked" : "u",
+    \ "Renamed"   : "r",
+    \ "Unmerged"  : "n",
+    \ "Deleted"   : "x",
+    \ "Dirty"     : "d",
+    \ "Clean"     : "v",
+    \ "Unknown"   : "?"
+    \ }
