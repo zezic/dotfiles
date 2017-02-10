@@ -20,6 +20,7 @@ if dein#load_state('/home/zezic/.config/dein')
   call dein#add('Xuyuanp/nerdtree-git-plugin')
   call dein#add('airblade/vim-gitgutter')
   call dein#add('ap/vim-css-color')
+  call dein#add('scrooloose/nerdcommenter')
 
   call dein#end()
   call dein#save_state()
@@ -58,6 +59,7 @@ let g:syntastic_python_checkers = [
 nmap <C-t> :TagbarToggle<CR>
 nnoremap <F5> :GundoToggle<CR>
 map <C-n> :NERDTreeToggle<CR>
+map <C-_> :call NERDComment(1, 'toggle')<CR>
 
 " UI
 set nu
