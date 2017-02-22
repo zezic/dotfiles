@@ -21,6 +21,8 @@ if dein#load_state('/home/zezic/.config/dein')
   call dein#add('airblade/vim-gitgutter')
   call dein#add('ap/vim-css-color')
   call dein#add('scrooloose/nerdcommenter')
+  call dein#add('nathanaelkane/vim-indent-guides')
+  call dein#add('digitaltoad/vim-pug')
 
   call dein#end()
   call dein#save_state()
@@ -35,8 +37,10 @@ if dein#check_install()
 endif
 
 " Plugins
+let g:indent_guides_enable_on_vim_startup = 0 " Indent guides
 let g:deoplete#enable_at_startup = 1 " Autocompletion
 let g:jedi#completions_enabled = 0 " Disable vim-jedi completion
+let NERDTreeIgnore=['\.pyc$', '\~$', '__pycache__']
 autocmd BufWinEnter '__doc__' setlocal bufhidden=delete " Don't show Jedi docs
 
 " " Syntastic
@@ -49,17 +53,22 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_python_checkers = [
-  \ 'pyflakes',
-  \ 'pep8 --ignore=E731']
+  \ 'pylama --ignore E0401']
 
 " Behaviour
 " set clipboard+=unnamedplus
+set expandtab
+set tabstop=2
+set shiftwidth=2
+set ignorecase
+set smartcase
 
 " Hotkeys
 nmap <C-t> :TagbarToggle<CR>
 nnoremap <F5> :GundoToggle<CR>
 map <C-n> :NERDTreeToggle<CR>
 map <C-_> :call NERDComment(1, 'toggle')<CR>
+map <C-f> :noh<CR>
 
 " UI
 set nu
