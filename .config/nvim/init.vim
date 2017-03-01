@@ -1,17 +1,24 @@
 " curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
-" sh ./installer.sh /home/zezic/.config/dein
+" sh ./installer.sh ~/.config/dein
 " sudo pip3 install neovim
 " sudo pip install neovim
+" cd ~/.config/nvim
+" python3 -m venv venv3
+" source venv3/bin/activate
+" pip install neovim
+"
+""" Then in nvim console:
+" :UpdateRemotePlugins
 
 
-let g:python3_host_prog = '/home/zezic/.config/nvim/venv3/bin/python3'
+let g:python3_host_prog = $HOME.'/.config/nvim/venv3/bin/python3'
 
 
-set runtimepath+=/home/zezic/.config/dein/repos/github.com/Shougo/dein.vim
+set runtimepath+=~/.config/dein/repos/github.com/Shougo/dein.vim
 
-if dein#load_state('/home/zezic/.config/dein')
-  call dein#begin('/home/zezic/.config/dein')
-  call dein#add('/home/zezic/.config/dein/repos/github.com/Shougo/dein.vim')
+if dein#load_state('~/.config/dein')
+  call dein#begin('~/.config/dein')
+  call dein#add('~/.config/dein/repos/github.com/Shougo/dein.vim')
 
   call dein#add('joshdick/onedark.vim')
   call dein#add('Shougo/deoplete.nvim')
