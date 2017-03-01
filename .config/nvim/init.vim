@@ -1,4 +1,11 @@
+" curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
+" sh ./installer.sh /home/zezic/.config/dein
+" sudo pip3 install neovim
+" sudo pip install neovim
+
+
 let g:python3_host_prog = '/home/zezic/.config/nvim/venv3/bin/python3'
+
 
 set runtimepath+=/home/zezic/.config/dein/repos/github.com/Shougo/dein.vim
 
