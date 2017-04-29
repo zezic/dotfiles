@@ -13,13 +13,40 @@ from Xlib.error import BadDrawable
 
 display = Xlib.display.Display()
 
+TITLEBAR_HEIGHT = 32
+BTN_PADDING = int((TITLEBAR_HEIGHT - 6) / 2)
+TITLE_OFFSET = BTN_PADDING
 
-CUSTOM_COLORS = {
+COLORS = {
+    "default": {
+        "bg": "#F5F6F7",
+        "fg": "#5C616C"
+    },
     "Firefox": {
         "bg": "#E7E8EB",
         "fg": "#5C616C"
+    },
+    "feh": {
+        "bg": "#121212",
+        "fg": "#888888"
+    },
+    "Blender": {
+        "bg": "#555555",
+        "fg": "#E8E8E8"
+    },
+    "Renoise": {
+        "bg": "#2C2C2C",
+        "fg": "#DADADA"
+    },
+    "Gnome-terminal": {
+        "bg": "#23272E",
+        "fg": "#ABB2BF"
     }
 }
+
+BLACKLIST = [
+    "Bitwig Studio"
+]
 
 
 class Window():
@@ -99,17 +126,24 @@ class Bar():
         Thread(target=self.update_zindex).start()
 
     def spawn(self):
+        if self.window.wm_class in COLORS:
+            palette = COLORS.get(self.window.wm_class)
+        else:
+            palette = COLORS.get('default')
         self.proc = pexpect.spawn(" ".join([
             'lemonbar', 
-            '-g', '{0}x32+{1}+{2}'.format(
+            '-g', '{0}x{3}+{1}+{2}'.format(
                 self.window.width,
                 self.window.x,
-                int(self.window.y) - 32
+                int(self.window.y) - TITLEBAR_HEIGHT,
+                TITLEBAR_HEIGHT
             ),
-            # '-d',                           # force docking
-            '-B', "#282C34",                # background color
+            # '-d',                         # force docking
+            '-B', palette.get('bg'),        # background color
+            '-F', palette.get('fg'),        # foreground color
             '-p',                           # permanent
-            '-f', '"Iosevka Term:size=9"',
+            # '-f', '"Iosevka Term:size=9"',
+            '-f', '"SF UI Display:size=9"',
             '-n', self.name                 # unique name
         ]))
 
@@ -130,12 +164,15 @@ class Bar():
             self.xlib = display.create_resource_object('window', int(self.wid, 16))
 
     def set_title(self, title):
-        self.proc.sendline("%{O12}" + title + "%{r}%{B#9D1A3C}%{O13}×%{O13}%{B-}")
+        bspc_cmd = "bspc node " + str(self.window.id) + " -c"
+        bspc_cmd = "gmrun"
+        print(bspc_cmd)
+        self.proc.sendline("%{O" + str(TITLE_OFFSET) + "}%{c}" + title + "%{r}%{B#9D1A3C}%{F#FFFFFF}%{O" + str(BTN_PADDING) + "}%{A:" + bspc_cmd + ":}kek×kek%{A}%{O" + str(BTN_PADDING) + "}%{B-}%{F-}")
 
     def update_position(self):
         if self.xlib:
             try:
-                self.xlib.configure(x=self.window.x, y=self.window.y - 32)
+                self.xlib.configure(x=self.window.x, y=self.window.y - TITLEBAR_HEIGHT)
                 self.xlib.get_geometry()
             except BadDrawable as e:
                 print("Moving too fast :)")
@@ -148,7 +185,7 @@ class Bar():
 
     def update_size_quickly(self):
         if self.xlib:
-            self.xlib.configure(x=self.window.x, y=self.window.y - 32, width=self.window.width)
+            self.xlib.configure(x=self.window.x, y=self.window.y - TITLEBAR_HEIGHT, width=self.window.width)
             self.xlib.get_geometry()
 
     def update_zindex(self):
@@ -211,7 +248,7 @@ def handle_visible_windows():
 
 handle_visible_windows()
 
-subscribe = pexpect.spawn('bspc subscribe node_geometry pointer_action desktop_focus node_manage node_unmanage node_stack node_focus', timeout=None)
+subscribe = pexpect.spawn('bspc subscribe node_geometry pointer_action desktop_focus node_manage node_unmanage node_stack node_focus node_transfer', timeout=None)
 
 while subscribe.isalive():
     parts = subscribe.readline().decode('utf-8').strip().split(" ")
@@ -242,6 +279,10 @@ while subscribe.isalive():
                 windows.pop(w_id, None)
             elif event == "node_focus":
                 window.bar.update_zindex()
+            elif event == "node_transfer":
+                window.bar.unmap()
+                window.bar.terminate_async()
+                windows.pop(w_id, None)
 
         else:
             if event == "node_manage":
