@@ -118,12 +118,14 @@ class Bar():
     def __init__(self, window):
         self.wid = None
         self.xlib = None
+        self.mapped = False
         self.window = window
         self.name = uuid4().hex
         self.spawn()
         Thread(target=self.set_title, args=(self.window.title,)).start()
         Thread(target=self.fetch_wid).start()
         Thread(target=self.update_zindex).start()
+        Thread(target=self.listen_clicks).start()
 
     def spawn(self):
         if self.window.wm_class in COLORS:
@@ -145,7 +147,15 @@ class Bar():
             # '-f', '"Iosevka Term:size=9"',
             '-f', '"SF UI Display:size=9"',
             '-n', self.name                 # unique name
-        ]))
+        ]), timeout=None)
+        self.mapped = True
+
+    def listen_clicks(self):
+        while self.mapped and self.proc.isalive():
+            command = self.proc.readline().decode('utf-8').strip()
+            if command == "close":
+                bspc_cmd = "bspc node " + str(self.window.id) + " -c"
+                subprocess.Popen(bspc_cmd, shell=True)
 
     def fetch_wid(self):
         sleep(0.1)
@@ -164,10 +174,7 @@ class Bar():
             self.xlib = display.create_resource_object('window', int(self.wid, 16))
 
     def set_title(self, title):
-        bspc_cmd = "bspc node " + str(self.window.id) + " -c"
-        bspc_cmd = "gmrun"
-        print(bspc_cmd)
-        self.proc.sendline("%{O" + str(TITLE_OFFSET) + "}%{c}" + title + "%{r}%{B#9D1A3C}%{F#FFFFFF}%{O" + str(BTN_PADDING) + "}%{A:" + bspc_cmd + ":}kek×kek%{A}%{O" + str(BTN_PADDING) + "}%{B-}%{F-}")
+        self.proc.sendline("%{O" + str(TITLE_OFFSET) + "}%{c}" + title + "%{r}%{B#9D1A3C}%{F#FFFFFF}%{A:close:}%{O" + str(BTN_PADDING) + "}×%{O" + str(BTN_PADDING) + "}%{A}%{B-}%{F-}")
 
     def update_position(self):
         if self.xlib:
@@ -202,14 +209,18 @@ class Bar():
         if self.xlib:
             self.xlib.map()
             self.xlib.get_geometry()
+        self.mapped = True
 
     def unmap(self):
         if self.xlib:
             self.xlib.unmap()
             self.xlib.get_geometry()
+        self.mapped = False
 
     def terminate(self):
+        self.mapped = False
         self.proc.terminate()
+        self.proc = None
 
     def terminate_async(self):
         t = Thread(target=self.terminate)
