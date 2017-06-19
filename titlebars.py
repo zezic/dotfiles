@@ -13,6 +13,8 @@ from Xlib.error import BadDrawable
 
 display = Xlib.display.Display()
 
+DEBUG = True
+
 TITLEBAR_HEIGHT = 32
 BTN_PADDING = int((TITLEBAR_HEIGHT - 6) / 2)
 TITLE_OFFSET = BTN_PADDING
@@ -48,6 +50,10 @@ BLACKLIST = [
     "Bitwig Studio"
 ]
 
+def debug(*args):
+    if DEBUG:
+        print(format(time(), '.4f'), "DEBUG:", *args)
+
 
 class Window():
     def __init__(self, window_id):
@@ -67,9 +73,21 @@ class Window():
         self.bar = Bar(self)
 
     def fetch_props(self):
-        self.title = self.xlib.get_wm_name()
+        self.fetch_title()
         class_tuple = self.xlib.get_wm_class()
         self.wm_class = class_tuple[1] if len(class_tuple) > 1 else class_tuple[0]
+
+    def fetch_title(self):
+        new_title = None
+        try:
+            new_title = self.xlib.get_wm_name()
+            if new_title != self.title:
+                self.title = new_title
+            else:
+                new_title = None
+        except TypeError as e:
+            print("!!!!!!!!", e)
+        return new_title
 
     def fetch_geometry(self):
         xlib_data = self.xlib.get_geometry()._data
@@ -96,8 +114,9 @@ class Window():
 
     def watcher(self):
         while self.is_moving:
+            debug("updating bar for window", self.id)
             self.update_bar()
-            sleep(0.016)  # about 60 FPS
+            sleep(0.5016)  # about 60 FPS
 
     def watch(self):
         self.is_moving = True
@@ -126,6 +145,7 @@ class Bar():
         Thread(target=self.fetch_wid).start()
         Thread(target=self.update_zindex).start()
         Thread(target=self.listen_clicks).start()
+        Thread(target=self.refresh_title).start()
 
     def spawn(self):
         if self.window.wm_class in COLORS:
@@ -156,6 +176,12 @@ class Bar():
             if command == "close":
                 bspc_cmd = "bspc node " + str(self.window.id) + " -c"
                 subprocess.Popen(bspc_cmd, shell=True)
+
+    def refresh_title(self):
+        while self.mapped:
+            if self.window.fetch_title():
+                self.set_title(self.window.title)
+            sleep(0.5)
 
     def fetch_wid(self):
         sleep(0.1)
@@ -250,6 +276,7 @@ windows = {}
 
 def handle_visible_windows():
     for w_id in get_visible_windows_ids():
+        debug("handling window", w_id)
         if w_id not in windows:
             windows.update({w_id: Window(w_id)})
         else:
@@ -279,7 +306,6 @@ while subscribe.isalive():
                     window.unwatch()
             elif event == "node_stack":
                 new_w_id = parts[1]
-                # relation = parts[2]
                 window.bar.update_zindex()
                 if new_w_id in windows:
                     new_window = windows[new_w_id]

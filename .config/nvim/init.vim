@@ -10,6 +10,27 @@
 """ Then in nvim console:
 " :UpdateRemotePlugins
 
+let g:onedark_color_overrides = {
+\ "red": { "gui": "#F07178", "cterm": "204", "cterm16": "1" },
+\ "dark_red": { "gui": "#F07178", "cterm": "196", "cterm16": "9" },
+\ "green": { "gui": "#C3E88D", "cterm": "114", "cterm16": "2" },
+\ "yellow": { "gui": "#FFE082", "cterm": "180", "cterm16": "3" },
+\ "dark_yellow": { "gui": "#FFCB6B", "cterm": "173", "cterm16": "11" },
+\ "blue": { "gui": "#82AAFF", "cterm": "39", "cterm16": "4" },
+\ "purple": { "gui": "#C792EA", "cterm": "170", "cterm16": "5" },
+\ "cyan": { "gui": "#89DDF3", "cterm": "38", "cterm16": "6" },
+\ "white": { "gui": "#B2CCD6", "cterm": "145", "cterm16": "7" },
+\ "black": { "gui": "#263238", "cterm": "235", "cterm16": "0" },
+\ "visual_black": { "gui": "NONE", "cterm": "NONE", "cterm16": "0" },
+\ "comment_grey": { "gui": "#4F6875", "cterm": "59", "cterm16": "15" },
+\ "gutter_fg_grey": { "gui": "#3E4A50", "cterm": "238", "cterm16": "15" },
+\ "cursor_grey": { "gui": "#37625A", "cterm": "236", "cterm16": "8" },
+\ "visual_grey": { "gui": "#2D3B42", "cterm": "237", "cterm16": "15" },
+\ "menu_grey": { "gui": "#2D3B42", "cterm": "237", "cterm16": "8" },
+\ "special_grey": { "gui": "#2D3B42", "cterm": "238", "cterm16": "15" },
+\ "vertsplit": { "gui": "#202A2F", "cterm": "59", "cterm16": "15" }
+\}
+
 
 let g:python3_host_prog = $HOME.'/.config/nvim/venv3/bin/python3'
 
@@ -30,13 +51,16 @@ if dein#load_state('~/.config/dein')
   call dein#add('davidhalter/jedi-vim')
   call dein#add('sjl/gundo.vim')
   call dein#add('scrooloose/nerdtree')
-  call dein#add('vim-syntastic/syntastic')
+  "call dein#add('vim-syntastic/syntastic')
   call dein#add('Xuyuanp/nerdtree-git-plugin')
   call dein#add('airblade/vim-gitgutter')
   call dein#add('ap/vim-css-color')
   call dein#add('scrooloose/nerdcommenter')
   call dein#add('nathanaelkane/vim-indent-guides')
   call dein#add('digitaltoad/vim-pug')
+  call dein#add('cakebaker/scss-syntax.vim')
+  call dein#add('posva/vim-vue')
+  "call dein#add('mattn/emmet-vim')
 
   call dein#end()
   call dein#save_state()
@@ -128,8 +152,8 @@ let g:lightline = {
   \   'syntastic': 'error',
   \ },
   \ 'colorscheme': 'onedark',
-  \ 'separator': { 'left': '⮀', 'right': '⮂' },
-  \ 'subseparator': { 'left': '⮁', 'right': '⮃' }
+  \ 'separator': { 'left': '▒', 'right': '▒' },
+  \ 'subseparator': { 'left': '┆', 'right': '┆' }
   \ }
 
 function! LightlineModified()
@@ -249,3 +273,26 @@ end
 " Look
 set termguicolors
 colorscheme onedark
+
+
+" NERDCommenter Vue Tweaks
+"let g:ft = ''
+"fu! NERDCommenter_before()
+  "if &ft == 'vue'
+    "let g:ft = 'vue'
+    "let stack = synstack(line('.'), col('.'))
+    "if len(stack) > 0
+      "let syn = synIDattr((stack)[0], 'name')
+      "if len(syn) > 0
+        "let syn = tolower(syn)
+        "exe 'setf '.syn
+      "endif
+    "endif
+  "endif
+"endfu
+"fu! NERDCommenter_after()
+  "if g:ft == 'vue'
+    "setf vue
+    "g:ft
+  "endif
+"endfu
