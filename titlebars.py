@@ -41,7 +41,7 @@ COLORS = {
         "fg": "#DADADA"
     },
     "Gnome-terminal": {
-        "bg": "#23272E",
+        "bg": "#263238",
         "fg": "#ABB2BF"
     }
 }

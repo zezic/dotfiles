@@ -1,0 +1,76 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "/tmp/d-117522-16881-wsyc2t.6a2n9afw29/package.tgz",
+        "scope": null,
+        "escapedName": null,
+        "name": null,
+        "rawSpec": "/tmp/d-117522-16881-wsyc2t.6a2n9afw29/package.tgz",
+        "spec": "/tmp/d-117522-16881-wsyc2t.6a2n9afw29/package.tgz",
+        "type": "local"
+      },
+      "/tmp/apm-install-dir-117522-16881-unfkrj.hokwwpcik9"
+    ]
+  ],
+  "_from": "../d-117522-16881-wsyc2t.6a2n9afw29/package.tgz",
+  "_id": "beta-syntax@0.1.1",
+  "_inCache": true,
+  "_location": "/beta-syntax",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "/tmp/d-117522-16881-wsyc2t.6a2n9afw29/package.tgz",
+    "scope": null,
+    "escapedName": null,
+    "name": null,
+    "rawSpec": "/tmp/d-117522-16881-wsyc2t.6a2n9afw29/package.tgz",
+    "spec": "/tmp/d-117522-16881-wsyc2t.6a2n9afw29/package.tgz",
+    "type": "local"
+  },
+  "_requiredBy": [
+    "#USER"
+  ],
+  "_resolved": "file:../d-117522-16881-wsyc2t.6a2n9afw29/package.tgz",
+  "_shasum": "9797967b3ebfa3bca3e27c3d50602d723e428f6e",
+  "_shrinkwrap": null,
+  "_spec": "/tmp/d-117522-16881-wsyc2t.6a2n9afw29/package.tgz",
+  "_where": "/tmp/apm-install-dir-117522-16881-unfkrj.hokwwpcik9",
+  "bugs": {
+    "url": "https://github.com/redgenco/beta-syntax/issues"
+  },
+  "dependencies": {},
+  "description": "A black Atom syntax theme.",
+  "devDependencies": {},
+  "engines": {
+    "atom": ">=1.0.0 <2.0.0"
+  },
+  "homepage": "https://github.com/redgenco/beta-syntax#readme",
+  "keywords": [
+    "syntax",
+    "black",
+    "dark",
+    "monochrome",
+    "theme"
+  ],
+  "license": "MIT",
+  "name": "beta-syntax",
+  "optionalDependencies": {},
+  "readme": "# beta-syntax theme\n\nA black Atom syntax theme.\n\n![Beta Title] (http://i.imgur.com/GJpVkPQ.png)\n\n### HTML\n![HTML Preview](http://i.imgur.com/JcfO943.png)\n---\n\n### CSS\n![CSS Preview](http://i.imgur.com/wDufqeN.png)\n---\n\n### CS\n![CS Preview](http://i.imgur.com/f5XyCWi.png)\n---\n\n[white-cursor] (https://atom.io/packages/white-cursor) package recommended.\n\n---\n\n[Alpha] (https://atom.io/themes/alpha-syntax) : [Beta] (https://atom.io/themes/beta-syntax)\n",
+  "readmeFilename": "README.md",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/redgenco/beta-syntax.git"
+  },
+  "theme": "syntax",
+  "version": "0.1.1",
+  "_atomModuleCache": {
+    "version": 1,
+    "dependencies": [],
+    "extensions": {
+      ".json": [
+        "package.json"
+      ]
+    },
+    "folders": []
+  }
+}
