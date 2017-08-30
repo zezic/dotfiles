@@ -1,0 +1,26 @@
+VteTerminal, vte-terminal {
+  padding: 24px;
+}
+
+
+/* .-vala-panel-appmenu-private > * > GtkLabel, .-vala-panel-appmenu-private > * > GtkWidget > * { */
+.-vala-panel-appmenu-private > * > GtkLabel,
+.-vala-panel-appmenu-private > * > *  > GtkLabel {
+	font-weight: normal;
+	padding: 0 4px 0 2px;
+  font-size: 10.5px;
+  /*background-color: red;*/
+}
+
+.-vala-panel-appmenu-private:nth-child(1) > * > GtkLabel {
+	/*font-style: italic;*/
+  font-weight: 900;
+}
+
+.-vala-panel-appmenu-private > * > GtkLabel {
+  font-size: 10.5px;
+}
+
+/*
+	color: #fcfcfc;
+*/
