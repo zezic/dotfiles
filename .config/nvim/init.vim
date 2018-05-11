@@ -10,6 +10,7 @@
 """ Then in nvim console:
 " :UpdateRemotePlugins
 
+""" Material
 "let g:onedark_color_overrides = {
 "\ "red": { "gui": "#F07178", "cterm": "204", "cterm16": "1" },
 "\ "dark_red": { "gui": "#F07178", "cterm": "196", "cterm16": "9" },
@@ -31,26 +32,123 @@
 "\ "vertsplit": { "gui": "#202A2F", "cterm": "59", "cterm16": "15" }
 "\}
 
-let g:onedark_color_overrides = {
-\ "red": { "gui": "#777777", "cterm": "204", "cterm16": "1" },
-\ "dark_red": { "gui": "#F07178", "cterm": "196", "cterm16": "9" },
-\ "green": { "gui": "#CCCCCC", "cterm": "114", "cterm16": "2" },
-\ "yellow": { "gui": "#666666", "cterm": "180", "cterm16": "3" },
-\ "dark_yellow": { "gui": "#555555", "cterm": "173", "cterm16": "11" },
-\ "blue": { "gui": "#595959", "cterm": "39", "cterm16": "4" },
-\ "purple": { "gui": "#AAAAAA", "cterm": "170", "cterm16": "5" },
-\ "cyan": { "gui": "#BBBBBB", "cterm": "38", "cterm16": "6" },
-\ "white": { "gui": "#999999", "cterm": "145", "cterm16": "7" },
-\ "black": { "gui": "#0d0d0d", "cterm": "235", "cterm16": "0" },
-\ "visual_black": { "gui": "NONE", "cterm": "NONE", "cterm16": "0" },
-\ "comment_grey": { "gui": "#333333", "cterm": "59", "cterm16": "15" },
-\ "gutter_fg_grey": { "gui": "#454545", "cterm": "238", "cterm16": "15" },
-\ "cursor_grey": { "gui": "#111111", "cterm": "236", "cterm16": "8" },
-\ "visual_grey": { "gui": "#222222", "cterm": "237", "cterm16": "15" },
-\ "menu_grey": { "gui": "#222222", "cterm": "237", "cterm16": "8" },
-\ "special_grey": { "gui": "#222222", "cterm": "238", "cterm16": "15" },
-\ "vertsplit": { "gui": "#111111", "cterm": "59", "cterm16": "15" }
-\}
+""" BW
+"let g:onedark_color_overrides = {
+"\ "red": { "gui": "#777777", "cterm": "204", "cterm16": "1" },
+"\ "dark_red": { "gui": "#F07178", "cterm": "196", "cterm16": "9" },
+"\ "green": { "gui": "#CCCCCC", "cterm": "114", "cterm16": "2" },
+"\ "yellow": { "gui": "#666666", "cterm": "180", "cterm16": "3" },
+"\ "dark_yellow": { "gui": "#555555", "cterm": "173", "cterm16": "11" },
+"\ "blue": { "gui": "#595959", "cterm": "39", "cterm16": "4" },
+"\ "purple": { "gui": "#AAAAAA", "cterm": "170", "cterm16": "5" },
+"\ "cyan": { "gui": "#BBBBBB", "cterm": "38", "cterm16": "6" },
+"\ "white": { "gui": "#999999", "cterm": "145", "cterm16": "7" },
+"\ "black": { "gui": "#0d0d0d", "cterm": "235", "cterm16": "0" },
+"\ "visual_black": { "gui": "NONE", "cterm": "NONE", "cterm16": "0" },
+"\ "comment_grey": { "gui": "#333333", "cterm": "59", "cterm16": "15" },
+"\ "gutter_fg_grey": { "gui": "#454545", "cterm": "238", "cterm16": "15" },
+"\ "cursor_grey": { "gui": "#111111", "cterm": "236", "cterm16": "8" },
+"\ "visual_grey": { "gui": "#222222", "cterm": "237", "cterm16": "15" },
+"\ "menu_grey": { "gui": "#222222", "cterm": "237", "cterm16": "8" },
+"\ "special_grey": { "gui": "#222222", "cterm": "238", "cterm16": "15" },
+"\ "vertsplit": { "gui": "#111111", "cterm": "59", "cterm16": "15" }
+"\}
+
+""" Rebecca
+  "let g:onedark_color_overrides = {
+  "\ "red": { "gui": "#a0a0c5", "cterm": "204", "cterm16": "1" },
+  "\ "dark_red": { "gui": "#efe4a1", "cterm": "196", "cterm16": "9" },
+  "\ "green": { "gui": "#6dfedf", "cterm": "114", "cterm16": "2" },
+  "\ "yellow": { "gui": "#ae81ff", "cterm": "180", "cterm16": "3" },
+  "\ "dark_yellow": { "gui": "#ae81ff", "cterm": "173", "cterm16": "11" },
+  "\ "blue": { "gui": "#2de0a7", "cterm": "39", "cterm16": "4" },
+  "\ "purple": { "gui": "#7aa5ff", "cterm": "170", "cterm16": "5" },
+  "\ "cyan": { "gui": "#8eaee0", "cterm": "38", "cterm16": "6" },
+  "\ "white": { "gui": "#a0a0c5", "cterm": "145", "cterm16": "7" },
+  "\ "black": { "gui": "#292a44", "cterm": "235", "cterm16": "0" },
+  "\ "visual_black": { "gui": "NONE", "cterm": "NONE", "cterm16": "0" },
+  "\ "comment_grey": { "gui": "#666699", "cterm": "59", "cterm16": "15" },
+  "\ "gutter_fg_grey": { "gui": "#666699", "cterm": "238", "cterm16": "15" },
+  "\ "cursor_grey": { "gui": "#663399", "cterm": "236", "cterm16": "8" },
+  "\ "visual_grey": { "gui": "#383a62", "cterm": "237", "cterm16": "15" },
+  "\ "menu_grey": { "gui": "#383a62", "cterm": "237", "cterm16": "8" },
+  "\ "special_grey": { "gui": "#383a62", "cterm": "238", "cterm16": "15" },
+  "\ "vertsplit": { "gui": "#383a62", "cterm": "59", "cterm16": "15" }
+  "\}
+
+""" Duotone Nature
+ "let g:onedark_color_overrides = {
+ "\ "red": { "gui": "#74AAD5", "cterm": "204", "cterm16": "1" },
+ "\ "dark_red": { "gui": "#5D7E98", "cterm": "196", "cterm16": "9" },
+ "\ "green": { "gui": "#B9DE91", "cterm": "114", "cterm16": "2" },
+ "\ "yellow": { "gui": "#E8FFD0", "cterm": "180", "cterm16": "3" },
+ "\ "dark_yellow": { "gui": "#D2EDB6", "cterm": "173", "cterm16": "11" },
+ "\ "blue": { "gui": "#AFDAFD", "cterm": "39", "cterm16": "4" },
+ "\ "purple": { "gui": "#546878", "cterm": "170", "cterm16": "5" },
+ "\ "cyan": { "gui": "#546878", "cterm": "38", "cterm16": "6" },
+ "\ "white": { "gui": "#97AEC1", "cterm": "145", "cterm16": "7" },
+ "\ "black": { "gui": "#1D2A34", "cterm": "235", "cterm16": "0" },
+ "\ "visual_black": { "gui": "NONE", "cterm": "NONE", "cterm16": "0" },
+ "\ "comment_grey": { "gui": "#43505B", "cterm": "59", "cterm16": "15" },
+ "\ "gutter_fg_grey": { "gui": "#45596A", "cterm": "238", "cterm16": "15" },
+ "\ "cursor_grey": { "gui": "#C4E5FF", "cterm": "236", "cterm16": "8" },
+ "\ "visual_grey": { "gui": "#283A48", "cterm": "237", "cterm16": "15" },
+ "\ "menu_grey": { "gui": "#283A48", "cterm": "237", "cterm16": "8" },
+ "\ "special_grey": { "gui": "#283A48", "cterm": "238", "cterm16": "15" },
+ "\ "vertsplit": { "gui": "#283A48", "cterm": "59", "cterm16": "15" }
+ "\}
+
+""" Monokai
+ let g:onedark_color_overrides = {
+ \ "red": { "gui": "#eb3d7c", "cterm": "204", "cterm16": "1" },
+ \ "dark_red": { "gui": "#eb3d7c", "cterm": "196", "cterm16": "9" },
+ \ "green": { "gui": "#a8d54e", "cterm": "114", "cterm16": "2" },
+ \ "yellow": { "gui": "#FFD569", "cterm": "180", "cterm16": "3" },
+ \ "dark_yellow": { "gui": "#fcb120", "cterm": "173", "cterm16": "11" },
+ \ "blue": { "gui": "#66D9EF", "cterm": "39", "cterm16": "4" },
+ \ "purple": { "gui": "#AE81FF", "cterm": "170", "cterm16": "5" },
+ \ "cyan": { "gui": "#89DDF3", "cterm": "38", "cterm16": "6" },
+ \ "white": { "gui": "#b4b4a8", "cterm": "145", "cterm16": "7" },
+ \ "black": { "gui": "#202020", "cterm": "235", "cterm16": "0" },
+ \ "visual_black": { "gui": "NONE", "cterm": "NONE", "cterm16": "0" },
+ \ "comment_grey": { "gui": "#75715E", "cterm": "59", "cterm16": "15" },
+ \ "gutter_fg_grey": { "gui": "#75715E", "cterm": "238", "cterm16": "15" },
+ \ "cursor_grey": { "gui": "#303030", "cterm": "236", "cterm16": "8" },
+ \ "visual_grey": { "gui": "#303030", "cterm": "237", "cterm16": "15" },
+ \ "menu_grey": { "gui": "#303030", "cterm": "237", "cterm16": "8" },
+ \ "special_grey": { "gui": "#303030", "cterm": "238", "cterm16": "15" },
+ \ "vertsplit": { "gui": "#303030", "cterm": "59", "cterm16": "15" }
+ \}
+
+""" Mariana
+"let g:onedark_color_overrides = {
+"\ "red": { "gui": "#F07178", "cterm": "204", "cterm16": "1" },
+"\ "dark_red": { "gui": "#EC5f67", "cterm": "196", "cterm16": "9" },
+"\ "green": { "gui": "#99C794", "cterm": "114", "cterm16": "2" },
+"\ "yellow": { "gui": "#FAC863", "cterm": "180", "cterm16": "3" },
+"\ "dark_yellow": { "gui": "#F9AE58", "cterm": "173", "cterm16": "11" },
+"\ "blue": { "gui": "#6699cc", "cterm": "39", "cterm16": "4" },
+"\ "purple": { "gui": "#7986CB", "cterm": "170", "cterm16": "5" },
+"\ "cyan": { "gui": "#89DDF3", "cterm": "38", "cterm16": "6" },
+"\ "white": { "gui": "#D8DEE9", "cterm": "145", "cterm16": "7" },
+"\ "black": { "gui": "#343D46", "cterm": "235", "cterm16": "0" },
+"\ "visual_black": { "gui": "NONE", "cterm": "NONE", "cterm16": "0" },
+"\ "comment_grey": { "gui": "#576573", "cterm": "59", "cterm16": "15" },
+"\ "gutter_fg_grey": { "gui": "#576573", "cterm": "238", "cterm16": "15" },
+"\ "cursor_grey": { "gui": "#2A3138", "cterm": "236", "cterm16": "8" },
+"\ "visual_grey": { "gui": "#2A3138", "cterm": "237", "cterm16": "15" },
+"\ "menu_grey": { "gui": "#2A3138", "cterm": "237", "cterm16": "8" },
+"\ "special_grey": { "gui": "#2A3138", "cterm": "238", "cterm16": "15" },
+"\ "vertsplit": { "gui": "#2A3138", "cterm": "59", "cterm16": "15" }
+"\}
+
+
+"let g:onedark_color_overrides = {
+"\ "white": { "gui": "#8490AC", "cterm": "145", "cterm16": "7" },
+"\ "black": { "gui": "#272A30", "cterm": "235", "cterm16": "0" },
+"\}
+
+
 
 
 let g:python3_host_prog = $HOME.'/.config/nvim/venv3/bin/python3'
@@ -72,7 +170,7 @@ if dein#load_state('~/.config/dein')
   call dein#add('davidhalter/jedi-vim')
   call dein#add('sjl/gundo.vim')
   call dein#add('scrooloose/nerdtree')
-  "call dein#add('vim-syntastic/syntastic')
+  call dein#add('vim-syntastic/syntastic')
   call dein#add('Xuyuanp/nerdtree-git-plugin')
   call dein#add('airblade/vim-gitgutter')
   call dein#add('ap/vim-css-color')
@@ -81,6 +179,11 @@ if dein#load_state('~/.config/dein')
   call dein#add('digitaltoad/vim-pug')
   call dein#add('cakebaker/scss-syntax.vim')
   call dein#add('posva/vim-vue')
+  call dein#add('junegunn/goyo.vim')
+  call dein#add('pangloss/vim-javascript')
+  call dein#add('tpope/vim-surround')
+  call dein#add('terryma/vim-multiple-cursors')
+  "call dein#add('hhsnopek/vim-sugarss')
   "call dein#add('mattn/emmet-vim')
 
   call dein#end()
@@ -125,7 +228,7 @@ set smartcase
 " Hotkeys
 nmap <C-t> :TagbarToggle<CR>
 nnoremap <F5> :GundoToggle<CR>
-map <C-n> :NERDTreeToggle<CR>
+map <C-\> :NERDTreeToggle<CR>
 map <C-_> :call NERDComment(1, 'toggle')<CR>
 map <C-f> :noh<CR>
 
