@@ -152,7 +152,8 @@
 
 
 let g:python3_host_prog = $HOME.'/.config/nvim/venv3/bin/python3'
-
+let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git\|.venv\|uploads'
+let g:ctrlp_working_path_mode = 'a'
 
 set runtimepath+=~/.config/dein/repos/github.com/Shougo/dein.vim
 
@@ -420,3 +421,4 @@ colorscheme onedark
     "g:ft
   "endif
 "endfu
+let $NVIM_TUI_ENABLE_CURSOR_SHAPE = 0
