@@ -192,6 +192,7 @@ if dein#load_state('~/.config/dein')
   call dein#add('scrooloose/nerdcommenter')
   call dein#add('zezic/vim-vue')
   call dein#add('Yggdroot/indentLine')
+  call dein#add('sekel/vim-vue-syntastic')
 
   call dein#end()
   call dein#save_state()
@@ -210,17 +211,9 @@ let g:indent_guides_enable_on_vim_startup = 0 " Indent guides
 let g:deoplete#enable_at_startup = 1 " Autocompletion
 let g:jedi#completions_enabled = 0 " Disable vim-jedi completion
 let NERDTreeIgnore=['\.pyc$', '\~$', '__pycache__']
+let NERDTreeQuitOnOpen=1
 autocmd BufWinEnter '__doc__' setlocal bufhidden=delete " Don't show Jedi docs
 autocmd FileType vue syntax sync fromstart " Fix Vue highlighting
-
-" for LanguageClient-neovim
-" set hidden
-" let g:LanguageClient_serverCommands = {
-"     \ 'vue': ['vls'],
-"     \ }
-" not stop completion $ & /
-" setlocal iskeyword+=$
-" setlocal iskeyword+=-
 
 " " Syntastic
 set statusline+=%#warningmsg#
@@ -228,11 +221,24 @@ set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
 let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
+" let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
-let g:syntastic_python_checkers = [
-  \ 'pylama --ignore E0401']
+let g:syntastic_python_checkers = ['pylama']
+let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_vue_checkers = ['eslint']
+
+
+let local_eslint = finddir('node_modules', '.;') . '/.bin/eslint'
+if matchstr(local_eslint, "^\/\\w") == ''
+	let local_eslint = getcwd() . "/" . local_eslint
+endif
+if executable(local_eslint)
+	let g:syntastic_javascript_eslint_exec = local_eslint
+	let g:syntastic_vue_eslint_exec = local_eslint
+else
+	let g:syntastic_javascript_eslint_exe = 'npm run lint --'
+endif
 
 " Behaviour
 " set clipboard+=unnamedplus
@@ -249,6 +255,9 @@ map <C-\> :NERDTreeToggle<CR>
 map <C-_> :call NERDComment(1, 'toggle')<CR>
 " map <C-_> gcc
 map <C-f> :noh<CR>
+
+map <F3> :tabp<CR>
+map <F4> :tabn<CR>
 
 " UI
 set nu
