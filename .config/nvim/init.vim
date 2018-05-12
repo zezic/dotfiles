@@ -203,6 +203,7 @@ let g:deoplete#enable_at_startup = 1 " Autocompletion
 let g:jedi#completions_enabled = 0 " Disable vim-jedi completion
 let NERDTreeIgnore=['\.pyc$', '\~$', '__pycache__']
 autocmd BufWinEnter '__doc__' setlocal bufhidden=delete " Don't show Jedi docs
+autocmd FileType vue syntax sync fromstart " Fix Vue highlighting
 
 " " Syntastic
 set statusline+=%#warningmsg#
