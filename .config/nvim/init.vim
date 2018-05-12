@@ -149,12 +149,14 @@
 "\}
 hi! link Noise Comment
 
-let g:onedark_terminal_italics=1
+" let g:onedark_terminal_italics=1
 
 let g:python3_host_prog = $HOME.'/.config/nvim/venv3/bin/python3'
 let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git\|.venv\|uploads'
 let g:ctrlp_working_path_mode = 'a'
 let g:python_highlight_all = 1
+
+" let g:vue_disable_pre_processors=1
 
 set runtimepath+=~/.config/dein/repos/github.com/Shougo/dein.vim
 
@@ -176,12 +178,10 @@ if dein#load_state('~/.config/dein')
   call dein#add('Xuyuanp/nerdtree-git-plugin')
   call dein#add('airblade/vim-gitgutter')
   call dein#add('ap/vim-css-color')
-  call dein#add('tyru/caw.vim')
   call dein#add('Shougo/context_filetype.vim')
   call dein#add('nathanaelkane/vim-indent-guides')
   call dein#add('digitaltoad/vim-pug')
   call dein#add('cakebaker/scss-syntax.vim')
-  call dein#add('posva/vim-vue')
   call dein#add('junegunn/goyo.vim')
   call dein#add('pangloss/vim-javascript')
   call dein#add('tpope/vim-surround')
@@ -189,6 +189,9 @@ if dein#load_state('~/.config/dein')
   call dein#add('romgrk/python-syntax', {'rev': 'syntax-improvements'})
   call dein#add('vim-scripts/auto-pairs-gentle')
   call dein#add('Vimjas/vim-python-pep8-indent')
+  call dein#add('scrooloose/nerdcommenter')
+  call dein#add('zezic/vim-vue')
+  call dein#add('Yggdroot/indentLine')
 
   call dein#end()
   call dein#save_state()
@@ -209,6 +212,15 @@ let g:jedi#completions_enabled = 0 " Disable vim-jedi completion
 let NERDTreeIgnore=['\.pyc$', '\~$', '__pycache__']
 autocmd BufWinEnter '__doc__' setlocal bufhidden=delete " Don't show Jedi docs
 autocmd FileType vue syntax sync fromstart " Fix Vue highlighting
+
+" for LanguageClient-neovim
+" set hidden
+" let g:LanguageClient_serverCommands = {
+"     \ 'vue': ['vls'],
+"     \ }
+" not stop completion $ & /
+" setlocal iskeyword+=$
+" setlocal iskeyword+=-
 
 " " Syntastic
 set statusline+=%#warningmsg#
@@ -234,8 +246,8 @@ set smartcase
 nmap <C-t> :TagbarToggle<CR>
 nnoremap <F5> :GundoToggle<CR>
 map <C-\> :NERDTreeToggle<CR>
-"map <C-_> :call NERDComment(1, 'toggle')<CR>
-map <C-_> gcc
+map <C-_> :call NERDComment(1, 'toggle')<CR>
+" map <C-_> gcc
 map <C-f> :noh<CR>
 
 " UI
@@ -282,8 +294,8 @@ let g:lightline = {
   \   'syntastic': 'error',
   \ },
   \ 'colorscheme': 'onedark',
-  \ 'separator': { 'left': '▒', 'right': '▒' },
-  \ 'subseparator': { 'left': '┆', 'right': '┆' }
+  \ 'separator': { 'left': '', 'right': '' },
+  \ 'subseparator': { 'left': '', 'right': '' }
   \ }
 
 function! LightlineModified()
@@ -396,34 +408,47 @@ endfunction
 if (has("autocmd") && !has("gui"))
   let s:blue = { "gui": "#61AFEF", "cterm": "39", "cterm16": "4" } " Alternate cterm: 75
   let s:cyan = { "gui": "#56B6C2", "cterm": "38", "cterm16": "6" } " Alternate cterm: 73
-  autocmd ColorScheme * call onedark#set_highlight("FCallKeyword", { "fg": s:cyan })
-  autocmd ColorScheme * call onedark#set_highlight("FName", { "fg": s:blue })
+  " autocmd ColorScheme * call onedark#set_highlight("FCallKeyword", { "fg": s:cyan })
+  " autocmd ColorScheme * call onedark#set_highlight("FName", { "fg": s:blue })
 end
+
+" Add spaces after comment delimiters by default
+let g:NERDSpaceDelims = 1
+" Align line-wise comment delimiters flush left instead of following code indentation
+let g:NERDDefaultAlign = 'left'
 
 " Look
 set termguicolors
 colorscheme onedark
 
+" Indent guides
+let g:indentLine_color_gui = '#303030'
+let g:indentLine_char = '│'
+let g:indentLine_first_char = '│'
+let g:indentLine_showFirstIndentLevel = 1
 
-" NERDCommenter Vue Tweaks
-"let g:ft = ''
-"fu! NERDCommenter_before()
-  "if &ft == 'vue'
-    "let g:ft = 'vue'
-    "let stack = synstack(line('.'), col('.'))
-    "if len(stack) > 0
-      "let syn = synIDattr((stack)[0], 'name')
-      "if len(syn) > 0
-        "let syn = tolower(syn)
-        "exe 'setf '.syn
-      "endif
-    "endif
-  "endif
-"endfu
-"fu! NERDCommenter_after()
-  "if g:ft == 'vue'
-    "setf vue
-    "g:ft
-  "endif
-"endfu
+" VertLines
+set fillchars=vert:\▏
+
+
+let g:ft = ''
+function! NERDCommenter_before()
+  if &ft == 'vue'
+    let g:ft = 'vue'
+    let stack = synstack(line('.'), col('.'))
+    if len(stack) > 0
+      let syn = synIDattr((stack)[0], 'name')
+      if len(syn) > 0
+        exe 'setf ' . substitute(tolower(syn), '^vue_', '', '')
+      endif
+    endif
+  endif
+endfunction
+function! NERDCommenter_after()
+  if g:ft == 'vue'
+    setf vue
+    let g:ft = ''
+  endif
+endfunction
+
 let $NVIM_TUI_ENABLE_CURSOR_SHAPE = 0
