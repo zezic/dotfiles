@@ -209,11 +209,20 @@ if dein#check_install()
 endif
 
 " Plugins
+
+function! s:goyo_enter()
+  ALEDisable
+  silent! call lightline#disable()
+endfunction
+
+function! s:goyo_leave()
+  ALEEnable
+endfunction
+
+autocmd! User GoyoEnter nested call <SID>goyo_enter()
+autocmd! User GoyoLeave nested call <SID>goyo_leave()
 let g:vim_json_syntax_conceal = 0
 
-" let g:ale_linters = {
-" \   'python': ['pylama']
-" \ }
 let g:ale_python_pylint_executable = 'pylint'
 let g:ale_python_pylint_options = '--init-hook=''import sys; sys.path.append(".")'''
 let g:ale_python_pylint_use_global = 0
@@ -282,7 +291,7 @@ let g:lightline = {
   \             [ 'fugitive', 'filename', 'modified' ],
   \             [ 'ctrlpmark'] ],
   \   'right': [ [ 'linter_checking', 'linter_errors',
-  \                'linter_warnings', 'linter_ok', 'lineinfo' ],
+  \                'linter_warnings', 'lineinfo' ],
   \              [ 'percent' ],
   \              [ 'fileformat', 'fileencoding', 'filetype' ] ]
   \ },
