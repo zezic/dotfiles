@@ -174,7 +174,6 @@ if dein#load_state('~/.config/dein')
   call dein#add('davidhalter/jedi-vim')
   call dein#add('sjl/gundo.vim')
   call dein#add('scrooloose/nerdtree')
-  call dein#add('vim-syntastic/syntastic')
   call dein#add('Xuyuanp/nerdtree-git-plugin')
   call dein#add('airblade/vim-gitgutter')
   call dein#add('ap/vim-css-color')
@@ -192,9 +191,10 @@ if dein#load_state('~/.config/dein')
   call dein#add('scrooloose/nerdcommenter')
   call dein#add('zezic/vim-vue')
   call dein#add('Yggdroot/indentLine')
-  call dein#add('sekel/vim-vue-syntastic')
   call dein#add('elzr/vim-json')
   call dein#add('ervandew/supertab')
+  call dein#add('w0rp/ale')
+  call dein#add('maximbaz/lightline-ale')
 
   call dein#end()
   call dein#save_state()
@@ -211,6 +211,15 @@ endif
 " Plugins
 let g:vim_json_syntax_conceal = 0
 
+" let g:ale_linters = {
+" \   'python': ['pylama']
+" \ }
+let g:ale_python_pylint_executable = 'pylint'
+let g:ale_python_pylint_options = '--init-hook=''import sys; sys.path.append(".")'''
+let g:ale_python_pylint_use_global = 0
+let g:ale_python_pylint_change_directory = 0
+
+
 let g:indent_guides_enable_on_vim_startup = 0 " Indent guides
 let g:deoplete#enable_at_startup = 1 " Autocompletion
 let g:jedi#completions_enabled = 0 " Disable vim-jedi completion
@@ -218,31 +227,6 @@ let NERDTreeIgnore=['\.pyc$', '\~$', '__pycache__']
 let NERDTreeQuitOnOpen=1
 autocmd BufWinEnter '__doc__' setlocal bufhidden=delete " Don't show Jedi docs
 autocmd FileType vue syntax sync fromstart " Fix Vue highlighting
-
-" " Syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_python_checkers = ['pylama']
-let g:syntastic_javascript_checkers = ['eslint']
-let g:syntastic_vue_checkers = ['eslint']
-
-
-let local_eslint = finddir('node_modules', '.;') . '/.bin/eslint'
-if matchstr(local_eslint, "^\/\\w") == ''
-	let local_eslint = getcwd() . "/" . local_eslint
-endif
-if executable(local_eslint)
-	let g:syntastic_javascript_eslint_exec = local_eslint
-	let g:syntastic_vue_eslint_exec = local_eslint
-else
-	let g:syntastic_javascript_eslint_exe = 'npm run lint --'
-endif
 
 " Behaviour
 set clipboard+=unnamedplus
@@ -253,6 +237,8 @@ set ignorecase
 set smartcase
 
 " Hotkeys
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
 nmap <C-t> :TagbarToggle<CR>
 nnoremap <F5> :GundoToggle<CR>
 map <C-\> :NERDTreeToggle<CR>
@@ -295,7 +281,8 @@ let g:lightline = {
   \   'left': [ [ 'mode', 'paste' ],
   \             [ 'fugitive', 'filename', 'modified' ],
   \             [ 'ctrlpmark'] ],
-  \   'right': [ [ 'syntastic', 'lineinfo' ],
+  \   'right': [ [ 'linter_checking', 'linter_errors',
+  \                'linter_warnings', 'linter_ok', 'lineinfo' ],
   \              [ 'percent' ],
   \              [ 'fileformat', 'fileencoding', 'filetype' ] ]
   \ },
@@ -316,13 +303,19 @@ let g:lightline = {
   \   'fileencoding': 'LightlineFileencoding'
   \ },
   \ 'component_expand': {
-  \   'syntastic': 'SyntasticStatuslineFlag',
+  \   'linter_checking': 'lightline#ale#checking',
+  \   'linter_warnings': 'lightline#ale#warnings',
+  \   'linter_errors': 'lightline#ale#errors',
+  \   'linter_ok': 'lightline#ale#ok'
   \ },
   \ 'component_visible_condition': {
   \   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())'
   \ },
   \ 'component_type': {
-  \   'syntastic': 'error',
+  \   'linter_checking': 'left',
+  \   'linter_warnings': 'warning',
+  \   'linter_errors': 'error',
+  \   'linter_ok': 'left'
   \ },
   \ 'colorscheme': 'onedark',
   \ 'separator': { 'left': '', 'right': '' },
@@ -437,15 +430,6 @@ let g:tagbar_status_func = 'TagbarStatusFunc'
 function! TagbarStatusFunc(current, sort, fname, ...) abort
     let g:lightline.fname = a:fname
   return lightline#statusline(0)
-endfunction
-
-augroup AutoSyntastic
-  autocmd!
-  autocmd BufWritePost *.c,*.cpp call s:syntastic()
-augroup END
-function! s:syntastic()
-  SyntasticCheck
-  call lightline#update()
 endfunction
 
 " Syntax addons
