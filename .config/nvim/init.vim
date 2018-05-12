@@ -147,9 +147,9 @@
 "\ "white": { "gui": "#8490AC", "cterm": "145", "cterm16": "7" },
 "\ "black": { "gui": "#272A30", "cterm": "235", "cterm16": "0" },
 "\}
+hi! link Noise Comment
 
-
-
+let g:onedark_terminal_italics=1
 
 let g:python3_host_prog = $HOME.'/.config/nvim/venv3/bin/python3'
 let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git\|.venv\|uploads'
