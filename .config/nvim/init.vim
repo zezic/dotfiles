@@ -194,6 +194,7 @@ if dein#load_state('~/.config/dein')
   call dein#add('Yggdroot/indentLine')
   call dein#add('sekel/vim-vue-syntastic')
   call dein#add('elzr/vim-json')
+  call dein#add('ervandew/supertab')
 
   call dein#end()
   call dein#save_state()
@@ -470,7 +471,7 @@ set termguicolors
 colorscheme onedark
 
 " Indent guides
-let g:indentLine_color_gui = '#303030'
+let g:indentLine_color_gui = g:onedark_color_overrides.vertsplit.gui
 let g:indentLine_char = '│'
 let g:indentLine_first_char = '│'
 let g:indentLine_showFirstIndentLevel = 1
