@@ -193,6 +193,7 @@ if dein#load_state('~/.config/dein')
   call dein#add('zezic/vim-vue')
   call dein#add('Yggdroot/indentLine')
   call dein#add('sekel/vim-vue-syntastic')
+  call dein#add('elzr/vim-json')
 
   call dein#end()
   call dein#save_state()
@@ -207,6 +208,8 @@ if dein#check_install()
 endif
 
 " Plugins
+let g:vim_json_syntax_conceal = 0
+
 let g:indent_guides_enable_on_vim_startup = 0 " Indent guides
 let g:deoplete#enable_at_startup = 1 " Autocompletion
 let g:jedi#completions_enabled = 0 " Disable vim-jedi completion
@@ -221,7 +224,7 @@ set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
 let g:syntastic_always_populate_loc_list = 1
-" let g:syntastic_auto_loc_list = 1
+let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_python_checkers = ['pylama']
@@ -241,7 +244,7 @@ else
 endif
 
 " Behaviour
-" set clipboard+=unnamedplus
+set clipboard+=unnamedplus
 set expandtab
 set tabstop=2
 set shiftwidth=2
@@ -258,8 +261,19 @@ map <C-f> :noh<CR>
 
 map <F3> :tabp<CR>
 map <F4> :tabn<CR>
+map <A-1> :tabn 1<CR>
+map <A-2> :tabn 2<CR>
+map <A-3> :tabn 3<CR>
+map <A-4> :tabn 4<CR>
+map <A-5> :tabn 5<CR>
+map <A-6> :tabn 6<CR>
+map <A-7> :tabn 7<CR>
+map <A-8> :tabn 8<CR>
+map <A-9> :tabn 9<CR>
+map <A-0> :tabn 10<CR>
 
 " UI
+set mouse=a
 set nu
 set relativenumber
 
@@ -284,6 +298,13 @@ let g:lightline = {
   \              [ 'percent' ],
   \              [ 'fileformat', 'fileencoding', 'filetype' ] ]
   \ },
+  \ 'tab': {
+  \   'active': [ 'filename', 'modified' ],
+  \   'inactive': [ 'filename', 'modified' ]
+  \ },
+  \ 'tab_component_function': {
+  \   'filename': 'LightlineTabFilename'
+  \ },
   \ 'component_function': {
   \   'fugitive': 'LightlineFugitive',
   \   'ctrlpmark': 'CtrlPMark',
@@ -307,6 +328,24 @@ let g:lightline = {
   \ 'subseparator': { 'left': '', 'right': '' }
   \ }
 
+let s:m = { 'ControlP': 'CtrlP', '__Tagbar__': 'Tagbar', '__Gundo__': 'Gundo', '__Gundo_Preview__': 'Gundo Preview', '[Command Line]': 'Command Line'}
+let s:p = {}
+
+function! LightlineTabFilename(n) abort
+  let bufnr = tabpagebuflist(a:n)[tabpagewinnr(a:n) - 1]
+  let bufname = expand('#' . bufnr . ':t')
+  let buffullname = expand('#' . bufnr . ':p')
+  let bufnrs = filter(range(1, bufnr('$')), 'v:val != bufnr && len(bufname(v:val)) && bufexists(v:val) && buflisted(v:val)')
+  let i = index(map(copy(bufnrs), 'expand("#" . v:val . ":t")'), bufname)
+  let ft = gettabwinvar(a:n, tabpagewinnr(a:n), '&ft')
+  if strlen(bufname) && i >= 0 && map(bufnrs, 'expand("#" . v:val . ":p")')[i] != buffullname
+    let fname = substitute(buffullname, '.*/\([^/]\+/\)', '\1', '')
+  else
+    let fname = bufname
+  endif
+  return fname =~# '^\[preview' ? 'Preview' : get(s:m, fname, get(s:p, ft, fname))
+endfunction
+
 function! LightlineModified()
   return &ft =~ 'help' ? '' : &modified ? '+' : &modifiable ? '' : '-'
 endfunction
@@ -318,7 +357,7 @@ endfunction
 function! LightlineFugitive()
   try
     if expand('%:t') !~? 'Tagbar\|Gundo\|NERD' && &ft !~? 'vimfiler' && exists('*fugitive#head')
-      let mark = ''  " edit here for cool mark
+      let mark = ' '  " edit here for cool mark
       let branch = fugitive#head()
       return branch !=# '' ? mark.branch : ''
     endif
