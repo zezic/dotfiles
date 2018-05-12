@@ -195,6 +195,8 @@ if dein#load_state('~/.config/dein')
   call dein#add('ervandew/supertab')
   call dein#add('w0rp/ale')
   call dein#add('maximbaz/lightline-ale')
+  call dein#add('junegunn/fzf', { 'build': './install --all', 'merged': 0 })
+  call dein#add('junegunn/fzf.vim', { 'depends': 'fzf' })
 
   call dein#end()
   call dein#save_state()
@@ -267,6 +269,10 @@ map <A-7> :tabn 7<CR>
 map <A-8> :tabn 8<CR>
 map <A-9> :tabn 9<CR>
 map <A-0> :tabn 10<CR>
+
+nmap <Leader>p :Files<CR>
+nmap <Leader>t :BTags<CR>
+nmap ; :Buffers<CR>
 
 " UI
 set mouse=a
