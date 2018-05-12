@@ -175,7 +175,9 @@ if dein#load_state('~/.config/dein')
   call dein#add('Xuyuanp/nerdtree-git-plugin')
   call dein#add('airblade/vim-gitgutter')
   call dein#add('ap/vim-css-color')
-  call dein#add('scrooloose/nerdcommenter')
+  "call dein#add('scrooloose/nerdcommenter')
+  call dein#add('tyru/caw.vim')
+  call dein#add('Shougo/context_filetype.vim')
   call dein#add('nathanaelkane/vim-indent-guides')
   call dein#add('digitaltoad/vim-pug')
   call dein#add('cakebaker/scss-syntax.vim')
@@ -229,7 +231,8 @@ set smartcase
 nmap <C-t> :TagbarToggle<CR>
 nnoremap <F5> :GundoToggle<CR>
 map <C-\> :NERDTreeToggle<CR>
-map <C-_> :call NERDComment(1, 'toggle')<CR>
+"map <C-_> :call NERDComment(1, 'toggle')<CR>
+map <C-_> gcc
 map <C-f> :noh<CR>
 
 " UI
