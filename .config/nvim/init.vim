@@ -154,6 +154,7 @@
 let g:python3_host_prog = $HOME.'/.config/nvim/venv3/bin/python3'
 let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git\|.venv\|uploads'
 let g:ctrlp_working_path_mode = 'a'
+let g:python_highlight_all = 1
 
 set runtimepath+=~/.config/dein/repos/github.com/Shougo/dein.vim
 
@@ -186,6 +187,8 @@ if dein#load_state('~/.config/dein')
   call dein#add('pangloss/vim-javascript')
   call dein#add('tpope/vim-surround')
   call dein#add('terryma/vim-multiple-cursors')
+  " call dein#add('vim-python/python-syntax')
+  call dein#add('romgrk/python-syntax', {'rev': 'syntax-improvements'})
 
   call dein#end()
   call dein#save_state()
