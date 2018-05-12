@@ -184,8 +184,6 @@ if dein#load_state('~/.config/dein')
   call dein#add('pangloss/vim-javascript')
   call dein#add('tpope/vim-surround')
   call dein#add('terryma/vim-multiple-cursors')
-  "call dein#add('hhsnopek/vim-sugarss')
-  "call dein#add('mattn/emmet-vim')
 
   call dein#end()
   call dein#save_state()
