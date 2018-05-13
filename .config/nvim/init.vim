@@ -152,8 +152,6 @@ hi! link Noise Comment
 " let g:onedark_terminal_italics=1
 
 let g:python3_host_prog = $HOME.'/.config/nvim/venv3/bin/python3'
-let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git\|.venv\|uploads'
-let g:ctrlp_working_path_mode = 'a'
 let g:python_highlight_all = 1
 
 " let g:vue_disable_pre_processors=1
@@ -169,7 +167,6 @@ if dein#load_state('~/.config/dein')
   call dein#add('zchee/deoplete-jedi')
   call dein#add('itchyny/lightline.vim')
   call dein#add('tpope/vim-fugitive')
-  call dein#add('ctrlpvim/ctrlp.vim')
   call dein#add('majutsushi/tagbar')
   call dein#add('davidhalter/jedi-vim')
   call dein#add('sjl/gundo.vim')
@@ -197,6 +194,8 @@ if dein#load_state('~/.config/dein')
   call dein#add('maximbaz/lightline-ale')
   call dein#add('junegunn/fzf', { 'build': './install --all', 'merged': 0 })
   call dein#add('junegunn/fzf.vim', { 'depends': 'fzf' })
+  call dein#add('qpkorr/vim-bufkill')
+  call dein#add('SirVer/ultisnips')
 
   call dein#end()
   call dein#save_state()
@@ -270,9 +269,14 @@ map <A-8> :tabn 8<CR>
 map <A-9> :tabn 9<CR>
 map <A-0> :tabn 10<CR>
 
-nmap <Leader>p :Files<CR>
+nmap <C-p> :Files<CR>
 nmap <Leader>t :BTags<CR>
 nmap ; :Buffers<CR>
+
+let g:UltiSnipsExpandTrigger="<tab>"
+
+" nmap <C-w> :BD<CR>
+" nmap <C-W> :bd<CR>
 
 " UI
 set mouse=a
@@ -294,8 +298,7 @@ let g:NERDTreeIndicatorMapCustom = {
 let g:lightline = {
   \ 'active': {
   \   'left': [ [ 'mode', 'paste' ],
-  \             [ 'fugitive', 'filename', 'modified' ],
-  \             [ 'ctrlpmark'] ],
+  \             [ 'fugitive', 'filename', 'modified' ] ],
   \   'right': [ [ 'linter_checking', 'linter_errors',
   \                'linter_warnings', 'lineinfo' ],
   \              [ 'percent' ],
@@ -310,7 +313,6 @@ let g:lightline = {
   \ },
   \ 'component_function': {
   \   'fugitive': 'LightlineFugitive',
-  \   'ctrlpmark': 'CtrlPMark',
   \   'filename': 'LightlineFilename',
   \   'mode': 'LightlineMode',
   \   'fileformat': 'LightlineFileformat',
@@ -337,7 +339,7 @@ let g:lightline = {
   \ 'subseparator': { 'left': '', 'right': '' }
   \ }
 
-let s:m = { 'ControlP': 'CtrlP', '__Tagbar__': 'Tagbar', '__Gundo__': 'Gundo', '__Gundo_Preview__': 'Gundo Preview', '[Command Line]': 'Command Line'}
+let s:m = { '__Tagbar__': 'Tagbar', '__Gundo__': 'Gundo', '__Gundo_Preview__': 'Gundo Preview', '[Command Line]': 'Command Line'}
 let s:p = {}
 
 function! LightlineTabFilename(n) abort
@@ -377,8 +379,7 @@ endfunction
 
 function! LightlineFilename()
   let fname = expand('%:t')
-  return fname == 'ControlP' && has_key(g:lightline, 'ctrlp_item') ? g:lightline.ctrlp_item :
-        \ fname == '__Tagbar__' ? g:lightline.fname :
+  return fname == '__Tagbar__' ? g:lightline.fname :
         \ fname =~ '__Gundo\|NERD_tree' ? '' :
         \ &ft == 'vimfiler' ? vimfiler#get_status_string() :
         \ &ft == 'unite' ? unite#get_status_string() :
@@ -403,7 +404,6 @@ endfunction
 function! LightlineMode()
   let fname = expand('%:t')
   return fname == '__Tagbar__' ? 'Tagbar' :
-        \ fname == 'ControlP' ? 'CtrlP' :
         \ fname == '__Gundo__' ? 'Gundo' :
         \ fname == '__Gundo_Preview__' ? 'Gundo Preview' :
         \ fname =~ 'NERD_tree' ? 'NERDTree' :
@@ -411,33 +411,6 @@ function! LightlineMode()
         \ &ft == 'vimfiler' ? 'VimFiler' :
         \ &ft == 'vimshell' ? 'VimShell' :
         \ winwidth(0) > 60 ? lightline#mode() : ''
-endfunction
-
-function! CtrlPMark()
-  if expand('%:t') =~ 'ControlP' && has_key(g:lightline, 'ctrlp_item')
-    call lightline#link('iR'[g:lightline.ctrlp_regex])
-    return lightline#concatenate([g:lightline.ctrlp_prev, g:lightline.ctrlp_item
-          \ , g:lightline.ctrlp_next], 0)
-  else
-    return ''
-  endif
-endfunction
-
-let g:ctrlp_status_func = {
-  \ 'main': 'CtrlPStatusFunc_1',
-  \ 'prog': 'CtrlPStatusFunc_2',
-  \ }
-
-function! CtrlPStatusFunc_1(focus, byfname, regex, prev, item, next, marked)
-  let g:lightline.ctrlp_regex = a:regex
-  let g:lightline.ctrlp_prev = a:prev
-  let g:lightline.ctrlp_item = a:item
-  let g:lightline.ctrlp_next = a:next
-  return lightline#statusline(0)
-endfunction
-
-function! CtrlPStatusFunc_2(str)
-  return lightline#statusline(0)
 endfunction
 
 let g:tagbar_status_func = 'TagbarStatusFunc'
