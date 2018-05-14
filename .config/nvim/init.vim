@@ -99,25 +99,47 @@
  "\}
 
 """ Monokai
+ " let g:onedark_color_overrides = {
+ " \ "red": { "gui": "#eb3d7c", "cterm": "204", "cterm16": "1" },
+ " \ "dark_red": { "gui": "#eb3d7c", "cterm": "196", "cterm16": "9" },
+ " \ "green": { "gui": "#a8d54e", "cterm": "114", "cterm16": "2" },
+ " \ "yellow": { "gui": "#FFD569", "cterm": "180", "cterm16": "3" },
+ " \ "dark_yellow": { "gui": "#fcb120", "cterm": "173", "cterm16": "11" },
+ " \ "blue": { "gui": "#66D9EF", "cterm": "39", "cterm16": "4" },
+ " \ "purple": { "gui": "#AE81FF", "cterm": "170", "cterm16": "5" },
+ " \ "cyan": { "gui": "#89DDF3", "cterm": "38", "cterm16": "6" },
+ " \ "white": { "gui": "#b4b4a8", "cterm": "145", "cterm16": "7" },
+ " \ "black": { "gui": "#202020", "cterm": "235", "cterm16": "0" },
+ " \ "visual_black": { "gui": "NONE", "cterm": "NONE", "cterm16": "0" },
+ " \ "comment_grey": { "gui": "#75715E", "cterm": "59", "cterm16": "15" },
+ " \ "gutter_fg_grey": { "gui": "#75715E", "cterm": "238", "cterm16": "15" },
+ " \ "cursor_grey": { "gui": "#303030", "cterm": "236", "cterm16": "8" },
+ " \ "visual_grey": { "gui": "#303030", "cterm": "237", "cterm16": "15" },
+ " \ "menu_grey": { "gui": "#303030", "cterm": "237", "cterm16": "8" },
+ " \ "special_grey": { "gui": "#303030", "cterm": "238", "cterm16": "15" },
+ " \ "vertsplit": { "gui": "#303030", "cterm": "59", "cterm16": "15" }
+ " \}
+
+""" Base16 Ocean Light (Spacegray)
  let g:onedark_color_overrides = {
- \ "red": { "gui": "#eb3d7c", "cterm": "204", "cterm16": "1" },
- \ "dark_red": { "gui": "#eb3d7c", "cterm": "196", "cterm16": "9" },
- \ "green": { "gui": "#a8d54e", "cterm": "114", "cterm16": "2" },
- \ "yellow": { "gui": "#FFD569", "cterm": "180", "cterm16": "3" },
- \ "dark_yellow": { "gui": "#fcb120", "cterm": "173", "cterm16": "11" },
- \ "blue": { "gui": "#66D9EF", "cterm": "39", "cterm16": "4" },
- \ "purple": { "gui": "#AE81FF", "cterm": "170", "cterm16": "5" },
- \ "cyan": { "gui": "#89DDF3", "cterm": "38", "cterm16": "6" },
- \ "white": { "gui": "#b4b4a8", "cterm": "145", "cterm16": "7" },
- \ "black": { "gui": "#202020", "cterm": "235", "cterm16": "0" },
+ \ "red": { "gui": "#bf616a", "cterm": "204", "cterm16": "1" },
+ \ "dark_red": { "gui": "#da606c", "cterm": "196", "cterm16": "9" },
+ \ "green": { "gui": "#a3be8c", "cterm": "114", "cterm16": "2" },
+ \ "yellow": { "gui": "#ebcb8b", "cterm": "180", "cterm16": "3" },
+ \ "dark_yellow": { "gui": "#d08770", "cterm": "173", "cterm16": "11" },
+ \ "blue": { "gui": "#8fa1b3", "cterm": "39", "cterm16": "4" },
+ \ "purple": { "gui": "#b48ead", "cterm": "170", "cterm16": "5" },
+ \ "cyan": { "gui": "#96b5b4", "cterm": "38", "cterm16": "6" },
+ \ "white": { "gui": "#4f5b66", "cterm": "145", "cterm16": "7" },
+ \ "black": { "gui": "#eff1f5", "cterm": "235", "cterm16": "0" },
  \ "visual_black": { "gui": "NONE", "cterm": "NONE", "cterm16": "0" },
- \ "comment_grey": { "gui": "#75715E", "cterm": "59", "cterm16": "15" },
- \ "gutter_fg_grey": { "gui": "#75715E", "cterm": "238", "cterm16": "15" },
- \ "cursor_grey": { "gui": "#303030", "cterm": "236", "cterm16": "8" },
- \ "visual_grey": { "gui": "#303030", "cterm": "237", "cterm16": "15" },
- \ "menu_grey": { "gui": "#303030", "cterm": "237", "cterm16": "8" },
- \ "special_grey": { "gui": "#303030", "cterm": "238", "cterm16": "15" },
- \ "vertsplit": { "gui": "#303030", "cterm": "59", "cterm16": "15" }
+ \ "comment_grey": { "gui": "#a7adba", "cterm": "59", "cterm16": "15" },
+ \ "gutter_fg_grey": { "gui": "#c0c5ce", "cterm": "238", "cterm16": "15" },
+ \ "cursor_grey": { "gui": "#e1e4ea", "cterm": "236", "cterm16": "8" },
+ \ "visual_grey": { "gui": "#dfe1e8", "cterm": "237", "cterm16": "15" },
+ \ "menu_grey": { "gui": "#e4e8ef", "cterm": "237", "cterm16": "8" },
+ \ "special_grey": { "gui": "#dfe1e8", "cterm": "238", "cterm16": "15" },
+ \ "vertsplit": { "gui": "#dfe1e8", "cterm": "59", "cterm16": "15" }
  \}
 
 """ Mariana
@@ -147,9 +169,9 @@
 "\ "white": { "gui": "#8490AC", "cterm": "145", "cterm16": "7" },
 "\ "black": { "gui": "#272A30", "cterm": "235", "cterm16": "0" },
 "\}
-hi! link Noise Comment
+hi! link Noise SpecialComment
 
-" let g:onedark_terminal_italics=1
+let g:onedark_terminal_italics=1
 
 let g:python3_host_prog = $HOME.'/.config/nvim/venv3/bin/python3'
 let g:python_highlight_all = 1
@@ -177,12 +199,14 @@ if dein#load_state('~/.config/dein')
   call dein#add('Shougo/context_filetype.vim')
   call dein#add('nathanaelkane/vim-indent-guides')
   call dein#add('digitaltoad/vim-pug')
+  call dein#add('hail2u/vim-css3-syntax')
   call dein#add('cakebaker/scss-syntax.vim')
   call dein#add('junegunn/goyo.vim')
   call dein#add('pangloss/vim-javascript')
   call dein#add('tpope/vim-surround')
   call dein#add('terryma/vim-multiple-cursors')
-  call dein#add('romgrk/python-syntax', {'rev': 'syntax-improvements'})
+  " call dein#add('romgrk/python-syntax', {'rev': 'syntax-improvements'})
+  call dein#add('zezic/python-syntax')
   call dein#add('vim-scripts/auto-pairs-gentle')
   call dein#add('Vimjas/vim-python-pep8-indent')
   call dein#add('scrooloose/nerdcommenter')
@@ -196,6 +220,7 @@ if dein#load_state('~/.config/dein')
   call dein#add('junegunn/fzf.vim', { 'depends': 'fzf' })
   call dein#add('qpkorr/vim-bufkill')
   call dein#add('SirVer/ultisnips')
+  call dein#add('bronson/vim-trailing-whitespace')
 
   call dein#end()
   call dein#save_state()
@@ -210,7 +235,6 @@ if dein#check_install()
 endif
 
 " Plugins
-
 function! s:goyo_enter()
   ALEDisable
   silent! call lightline#disable()
@@ -245,6 +269,7 @@ set tabstop=2
 set shiftwidth=2
 set ignorecase
 set smartcase
+set scrolloff=2
 
 " Hotkeys
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
@@ -272,6 +297,9 @@ map <A-0> :tabn 10<CR>
 nmap <C-p> :Files<CR>
 nmap <Leader>t :BTags<CR>
 nmap ; :Buffers<CR>
+map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
+\ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
+\ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
 let g:UltiSnipsExpandTrigger="<tab>"
 
@@ -282,6 +310,22 @@ let g:UltiSnipsExpandTrigger="<tab>"
 set mouse=a
 set nu
 set relativenumber
+
+" Customize fzf colors to match your color scheme
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'border':  ['fg', 'Ignore'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
 
 let g:NERDTreeIndicatorMapCustom = {
     \ "Modified"  : "~",
@@ -433,6 +477,36 @@ if (has("autocmd") && !has("gui"))
   " autocmd ColorScheme * call onedark#set_highlight("FName", { "fg": s:blue })
 end
 
+" Spacegray emulation
+if (has("autocmd"))
+  augroup colorset
+    autocmd!
+    " Python
+    autocmd ColorScheme * call onedark#set_highlight("pythonKeywordArgument", { "fg": g:onedark_color_overrides.red })
+    autocmd ColorScheme * call onedark#set_highlight("pythonImport", { "fg": g:onedark_color_overrides.purple })
+    autocmd ColorScheme * call onedark#set_highlight("pythonNumber", { "fg": g:onedark_color_overrides.dark_yellow })
+    autocmd ColorScheme * call onedark#set_highlight("pythonClassName", { "fg": g:onedark_color_overrides.dark_yellow })
+    autocmd ColorScheme * call onedark#set_highlight("pythonStrFormat", { "fg": g:onedark_color_overrides.dark_yellow })
+    autocmd ColorScheme * call onedark#set_highlight("pythonConstant", { "fg": g:onedark_color_overrides.red })
+
+    " JavaScript
+    autocmd ColorScheme * call onedark#set_highlight("jsDestructuringBlock", { "fg": g:onedark_color_overrides.red })
+    autocmd ColorScheme * call onedark#set_highlight("jsModuleKeyword", { "fg": g:onedark_color_overrides.red })
+    autocmd ColorScheme * call onedark#set_highlight("jsVariableDef", { "fg": g:onedark_color_overrides.red })
+    autocmd ColorScheme * call onedark#set_highlight("jsObject", { "fg": g:onedark_color_overrides.red })
+    autocmd ColorScheme * call onedark#set_highlight("jsFuncBlock", { "fg": g:onedark_color_overrides.red })
+    autocmd ColorScheme * call onedark#set_highlight("jsForAwait", { "fg": g:onedark_color_overrides.purple })
+
+    " Pug
+    autocmd ColorScheme * call onedark#set_highlight("pugClass", { "fg": g:onedark_color_overrides.dark_yellow })
+    autocmd ColorScheme * call onedark#set_highlight("pugId", { "fg": g:onedark_color_overrides.blue })
+
+    " Sass
+    autocmd ColorScheme * call onedark#set_highlight("sassAmpersand", { "fg": g:onedark_color_overrides.purple })
+    autocmd ColorScheme * call onedark#set_highlight("sassVariable", { "fg": g:onedark_color_overrides.red })
+  augroup END
+endif
+
 " Add spaces after comment delimiters by default
 let g:NERDSpaceDelims = 1
 " Align line-wise comment delimiters flush left instead of following code indentation
@@ -441,6 +515,7 @@ let g:NERDDefaultAlign = 'left'
 " Look
 set termguicolors
 colorscheme onedark
+" set laststatus=0
 
 " Indent guides
 let g:indentLine_color_gui = g:onedark_color_overrides.vertsplit.gui
