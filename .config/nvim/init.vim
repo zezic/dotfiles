@@ -120,7 +120,29 @@
  " \ "vertsplit": { "gui": "#303030", "cterm": "59", "cterm16": "15" }
  " \}
 
-""" Base16 Ocean Light (Spacegray)
+"""" Base16 Ocean Light (Spacegray)
+ " let g:onedark_color_overrides = {
+ " \ "red": { "gui": "#bf616a", "cterm": "204", "cterm16": "1" },
+ " \ "dark_red": { "gui": "#da606c", "cterm": "196", "cterm16": "9" },
+ " \ "green": { "gui": "#a3be8c", "cterm": "114", "cterm16": "2" },
+ " \ "yellow": { "gui": "#ebcb8b", "cterm": "180", "cterm16": "3" },
+ " \ "dark_yellow": { "gui": "#d08770", "cterm": "173", "cterm16": "11" },
+ " \ "blue": { "gui": "#8fa1b3", "cterm": "39", "cterm16": "4" },
+ " \ "purple": { "gui": "#b48ead", "cterm": "170", "cterm16": "5" },
+ " \ "cyan": { "gui": "#96b5b4", "cterm": "38", "cterm16": "6" },
+ " \ "white": { "gui": "#4f5b66", "cterm": "145", "cterm16": "7" },
+ " \ "black": { "gui": "#eff1f5", "cterm": "235", "cterm16": "0" },
+ " \ "visual_black": { "gui": "NONE", "cterm": "NONE", "cterm16": "0" },
+ " \ "comment_grey": { "gui": "#a7adba", "cterm": "59", "cterm16": "15" },
+ " \ "gutter_fg_grey": { "gui": "#c0c5ce", "cterm": "238", "cterm16": "15" },
+ " \ "cursor_grey": { "gui": "#e1e4ea", "cterm": "236", "cterm16": "8" },
+ " \ "visual_grey": { "gui": "#dfe1e8", "cterm": "237", "cterm16": "15" },
+ " \ "menu_grey": { "gui": "#e4e8ef", "cterm": "237", "cterm16": "8" },
+ " \ "special_grey": { "gui": "#dfe1e8", "cterm": "238", "cterm16": "15" },
+ " \ "vertsplit": { "gui": "#dfe1e8", "cterm": "59", "cterm16": "15" }
+ " \}
+
+"" Base16 Ocean Dark (Spacegray)
  let g:onedark_color_overrides = {
  \ "red": { "gui": "#bf616a", "cterm": "204", "cterm16": "1" },
  \ "dark_red": { "gui": "#da606c", "cterm": "196", "cterm16": "9" },
@@ -130,16 +152,17 @@
  \ "blue": { "gui": "#8fa1b3", "cterm": "39", "cterm16": "4" },
  \ "purple": { "gui": "#b48ead", "cterm": "170", "cterm16": "5" },
  \ "cyan": { "gui": "#96b5b4", "cterm": "38", "cterm16": "6" },
- \ "white": { "gui": "#4f5b66", "cterm": "145", "cterm16": "7" },
- \ "black": { "gui": "#eff1f5", "cterm": "235", "cterm16": "0" },
+ \ "white": { "gui": "#c0c5ce", "cterm": "145", "cterm16": "7" },
+ \ "super_white": { "gui": "#e0f7ff", "cterm": "145", "cterm16": "7" },
+ \ "black": { "gui": "#2e333d", "cterm": "235", "cterm16": "0" },
  \ "visual_black": { "gui": "NONE", "cterm": "NONE", "cterm16": "0" },
- \ "comment_grey": { "gui": "#a7adba", "cterm": "59", "cterm16": "15" },
- \ "gutter_fg_grey": { "gui": "#c0c5ce", "cterm": "238", "cterm16": "15" },
- \ "cursor_grey": { "gui": "#e1e4ea", "cterm": "236", "cterm16": "8" },
- \ "visual_grey": { "gui": "#dfe1e8", "cterm": "237", "cterm16": "15" },
- \ "menu_grey": { "gui": "#e4e8ef", "cterm": "237", "cterm16": "8" },
- \ "special_grey": { "gui": "#dfe1e8", "cterm": "238", "cterm16": "15" },
- \ "vertsplit": { "gui": "#dfe1e8", "cterm": "59", "cterm16": "15" }
+ \ "comment_grey": { "gui": "#65737e", "cterm": "59", "cterm16": "15" },
+ \ "gutter_fg_grey": { "gui": "#65737e", "cterm": "238", "cterm16": "15" },
+ \ "cursor_grey": { "gui": "#343a45", "cterm": "236", "cterm16": "8" },
+ \ "visual_grey": { "gui": "#3c434f", "cterm": "237", "cterm16": "15" },
+ \ "menu_grey": { "gui": "#232830", "cterm": "237", "cterm16": "8" },
+ \ "special_grey": { "gui": "#434d5c", "cterm": "238", "cterm16": "15" },
+ \ "vertsplit": { "gui": "#434d5c", "cterm": "59", "cterm16": "15" }
  \}
 
 """ Mariana
@@ -339,13 +362,75 @@ let g:NERDTreeIndicatorMapCustom = {
     \ "Unknown"   : "?"
     \ }
 
+let s:colors = onedark#GetColors()
+
+" Invert lightline colors
+if get(g:, 'onedark_termcolors', 256) == 16
+  let s:term_red = s:colors.red.cterm16
+  let s:term_green = s:colors.green.cterm16
+  let s:term_yellow = s:colors.yellow.cterm16
+  let s:term_blue = s:colors.blue.cterm16
+  let s:term_purple = s:colors.purple.cterm16
+  let s:term_cyan = s:colors.cyan.cterm16
+  let s:term_white = s:colors.white.cterm16
+  let s:term_black = s:colors.black.cterm16
+  let s:term_grey = s:colors.cursor_grey.cterm16
+  let s:term_comment = s:colors.comment_grey.cterm16
+else
+  let s:term_red = s:colors.red.cterm
+  let s:term_green = s:colors.green.cterm
+  let s:term_yellow = s:colors.yellow.cterm
+  let s:term_blue = s:colors.blue.cterm
+  let s:term_purple = s:colors.purple.cterm
+  let s:term_cyan = s:colors.cyan.cterm
+  let s:term_white = s:colors.white.cterm
+  let s:term_black = s:colors.black.cterm
+  let s:term_grey = s:colors.cursor_grey.cterm
+  let s:term_comment = s:colors.comment_grey.cterm
+endif
+
+let s:red = [ s:colors.red.gui, s:term_red ]
+let s:green = [ s:colors.green.gui, s:term_green ]
+let s:yellow = [ s:colors.yellow.gui, s:term_yellow ]
+let s:blue = [ s:colors.blue.gui, s:term_blue ]
+let s:cyan = [ s:colors.cyan.gui, s:term_cyan ]
+let s:purple = [ s:colors.purple.gui, s:term_purple ]
+let s:white = [ s:colors.white.gui, s:term_white ]
+let s:black = [ s:colors.black.gui, s:term_black ]
+let s:grey = [ s:colors.visual_grey.gui, s:term_grey ]
+let s:comment = [ s:colors.comment_grey.gui, s:term_comment ]
+
+let s:p = {'normal': {}, 'inactive': {}, 'insert': {}, 'replace': {}, 'visual': {}, 'tabline': {}}
+let s:p.normal.left = [ [ s:comment, s:black ], [ s:comment, s:black ] ]
+let s:p.normal.right = [ [ s:comment, s:black ], [ s:comment, s:black ] ]
+let s:p.inactive.left =  [ [ s:grey, s:black ], [ s:grey, s:black ] ]
+let s:p.inactive.right = [ [ s:grey, s:black ], [ s:grey, s:black ] ]
+let s:p.insert.left = [ [ s:cyan, s:black ], [ s:cyan, s:black ] ]
+let s:p.insert.right = [ [ s:cyan, s:black ], [ s:cyan, s:black ] ]
+let s:p.replace.left = [ [ s:red, s:black ], [ s:red, s:black ] ]
+let s:p.replace.right = [ [ s:red, s:black ], [ s:red, s:black ] ]
+let s:p.visual.left = [ [ s:purple, s:black ], [ s:purple, s:black ] ]
+let s:p.visual.right = [ [ s:purple, s:black ], [ s:purple, s:black ] ]
+let s:p.normal.middle = [ [ s:comment, s:black ] ]
+let s:p.insert.middle = [ [ s:cyan, s:black ] ]
+let s:p.replace.middle = [ [ s:red, s:black ] ]
+let s:p.visual.middle = [ [ s:purple, s:black ] ]
+let s:p.inactive.middle = [ [ s:white, s:black ] ]
+let s:p.tabline.left = [ [ s:comment, s:black ] ]
+let s:p.tabline.tabsel = [ [ s:white, s:grey ] ]
+let s:p.tabline.middle = [ [ s:comment, s:black ] ]
+let s:p.tabline.right = [ [ s:comment, s:black ] ]
+let s:p.normal.error = [ [ s:red, s:black ] ]
+let s:p.normal.warning = [ [ s:yellow, s:black ] ]
+
+let g:lightline#colorscheme#onedark#palette = lightline#colorscheme#flatten(s:p)
+
 let g:lightline = {
   \ 'active': {
   \   'left': [ [ 'mode', 'paste' ],
   \             [ 'fugitive', 'filename', 'modified' ] ],
   \   'right': [ [ 'linter_checking', 'linter_errors',
   \                'linter_warnings', 'lineinfo' ],
-  \              [ 'percent' ],
   \              [ 'fileformat', 'fileencoding', 'filetype' ] ]
   \ },
   \ 'tab': {
@@ -380,8 +465,12 @@ let g:lightline = {
   \ },
   \ 'colorscheme': 'onedark',
   \ 'separator': { 'left': '', 'right': '' },
-  \ 'subseparator': { 'left': '', 'right': '' }
+  \ 'subseparator': { 'left': ' ❯ ', 'right': ' ❮ ' },
+  \ 'tabline_separator': { 'left': '', 'right': '' },
+  \ 'tabline_subseparator': { 'left': '', 'right': '' }
   \ }
+
+  " \ 'subseparator': { 'left': '', 'right': '' }
 
 let s:m = { '__Tagbar__': 'Tagbar', '__Gundo__': 'Gundo', '__Gundo_Preview__': 'Gundo Preview', '[Command Line]': 'Command Line'}
 let s:p = {}
@@ -477,7 +566,7 @@ if (has("autocmd") && !has("gui"))
   " autocmd ColorScheme * call onedark#set_highlight("FName", { "fg": s:blue })
 end
 
-" Spacegray emulation
+" Spacegray Light emulation
 if (has("autocmd"))
   augroup colorset
     autocmd!
@@ -504,6 +593,24 @@ if (has("autocmd"))
     " Sass
     autocmd ColorScheme * call onedark#set_highlight("sassAmpersand", { "fg": g:onedark_color_overrides.purple })
     autocmd ColorScheme * call onedark#set_highlight("sassVariable", { "fg": g:onedark_color_overrides.red })
+  augroup END
+endif
+
+" Spacegray Dark emulation
+if (has("autocmd"))
+  augroup colorset2
+    autocmd!
+    " Python
+    autocmd ColorScheme * call onedark#set_highlight("pythonClassName", { "fg": g:onedark_color_overrides.yellow })
+  augroup END
+endif
+
+" Search Highlight
+if (has("autocmd"))
+  augroup colorset3
+    autocmd!
+    autocmd ColorScheme * call onedark#set_highlight("Search", { "fg": g:onedark_color_overrides.super_white, "bg": g:onedark_color_overrides.special_grey })
+    autocmd ColorScheme * call onedark#set_highlight("IncSearch", { "fg": g:onedark_color_overrides.dark_red, "bg": g:onedark_color_overrides.menu_grey })
   augroup END
 endif
 
