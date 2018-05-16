@@ -1,0 +1,11 @@
+QWidget > * > * > * > QWidget {
+  /* background-color: #EEF1F5; /* Spacegray Light */
+  /* background-color: #2e333d; /* Spacegray Dark */
+  background-color: #20272B; /* Spacegray Dark Kodak Elite Color 400*/
+  padding: 16px 24px;
+}
+
+QWidget > * > * > * > * > * > QWidget {
+  background-color: #efefef;
+}
+

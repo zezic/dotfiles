@@ -1,11 +1,12 @@
 " curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
 " sh ./installer.sh ~/.config/dein
-" sudo pip3 install neovim
+" sudo pip3 install neovim pylint
 " sudo pip install neovim
 " cd ~/.config/nvim
 " python3 -m venv venv3
 " source venv3/bin/activate
 " pip install neovim
+" npm install -g tern
 "
 """ Then in nvim console:
 " :UpdateRemotePlugins
@@ -143,26 +144,49 @@
  " \}
 
 "" Base16 Ocean Dark (Spacegray)
+ " let g:onedark_color_overrides = {
+ " \ "red": { "gui": "#bf616a", "cterm": "204", "cterm16": "1" },
+ " \ "dark_red": { "gui": "#da606c", "cterm": "196", "cterm16": "9" },
+ " \ "green": { "gui": "#a3be8c", "cterm": "114", "cterm16": "2" },
+ " \ "yellow": { "gui": "#ebcb8b", "cterm": "180", "cterm16": "3" },
+ " \ "dark_yellow": { "gui": "#d08770", "cterm": "173", "cterm16": "11" },
+ " \ "blue": { "gui": "#8fa1b3", "cterm": "39", "cterm16": "4" },
+ " \ "purple": { "gui": "#b48ead", "cterm": "170", "cterm16": "5" },
+ " \ "cyan": { "gui": "#96b5b4", "cterm": "38", "cterm16": "6" },
+ " \ "white": { "gui": "#c0c5ce", "cterm": "145", "cterm16": "7" },
+ " \ "super_white": { "gui": "#e0f7ff", "cterm": "145", "cterm16": "7" },
+ " \ "black": { "gui": "#2e333d", "cterm": "235", "cterm16": "0" },
+ " \ "visual_black": { "gui": "NONE", "cterm": "NONE", "cterm16": "0" },
+ " \ "comment_grey": { "gui": "#65737e", "cterm": "59", "cterm16": "15" },
+ " \ "gutter_fg_grey": { "gui": "#65737e", "cterm": "238", "cterm16": "15" },
+ " \ "cursor_grey": { "gui": "#343a45", "cterm": "236", "cterm16": "8" },
+ " \ "visual_grey": { "gui": "#3c434f", "cterm": "237", "cterm16": "15" },
+ " \ "menu_grey": { "gui": "#232830", "cterm": "237", "cterm16": "8" },
+ " \ "special_grey": { "gui": "#434d5c", "cterm": "238", "cterm16": "15" },
+ " \ "vertsplit": { "gui": "#434d5c", "cterm": "59", "cterm16": "15" }
+ " \}
+
+"" Base16 Ocean Dark (Spacegray) Kodak Elite Color 400
  let g:onedark_color_overrides = {
- \ "red": { "gui": "#bf616a", "cterm": "204", "cterm16": "1" },
- \ "dark_red": { "gui": "#da606c", "cterm": "196", "cterm16": "9" },
- \ "green": { "gui": "#a3be8c", "cterm": "114", "cterm16": "2" },
- \ "yellow": { "gui": "#ebcb8b", "cterm": "180", "cterm16": "3" },
- \ "dark_yellow": { "gui": "#d08770", "cterm": "173", "cterm16": "11" },
- \ "blue": { "gui": "#8fa1b3", "cterm": "39", "cterm16": "4" },
- \ "purple": { "gui": "#b48ead", "cterm": "170", "cterm16": "5" },
- \ "cyan": { "gui": "#96b5b4", "cterm": "38", "cterm16": "6" },
- \ "white": { "gui": "#c0c5ce", "cterm": "145", "cterm16": "7" },
- \ "super_white": { "gui": "#e0f7ff", "cterm": "145", "cterm16": "7" },
- \ "black": { "gui": "#2e333d", "cterm": "235", "cterm16": "0" },
+ \ "red": { "gui": "#B43156", "cterm": "204", "cterm16": "1" },
+ \ "dark_red": { "gui": "#CF1C55", "cterm": "196", "cterm16": "9" },
+ \ "green": { "gui": "#ADB68B", "cterm": "114", "cterm16": "2" },
+ \ "yellow": { "gui": "#EEB689", "cterm": "180", "cterm16": "3" },
+ \ "dark_yellow": { "gui": "#CD5E63", "cterm": "173", "cterm16": "11" },
+ \ "blue": { "gui": "#7FA0A9", "cterm": "39", "cterm16": "4" },
+ \ "purple": { "gui": "#A681A2", "cterm": "170", "cterm16": "5" },
+ \ "cyan": { "gui": "#91B4AF", "cterm": "38", "cterm16": "6" },
+ \ "white": { "gui": "#B9C3C8", "cterm": "145", "cterm16": "7" },
+ \ "super_white": { "gui": "#DAF9FB", "cterm": "145", "cterm16": "7" },
+ \ "black": { "gui": "#20272B", "cterm": "235", "cterm16": "0" },
  \ "visual_black": { "gui": "NONE", "cterm": "NONE", "cterm16": "0" },
- \ "comment_grey": { "gui": "#65737e", "cterm": "59", "cterm16": "15" },
- \ "gutter_fg_grey": { "gui": "#65737e", "cterm": "238", "cterm16": "15" },
- \ "cursor_grey": { "gui": "#343a45", "cterm": "236", "cterm16": "8" },
- \ "visual_grey": { "gui": "#3c434f", "cterm": "237", "cterm16": "15" },
- \ "menu_grey": { "gui": "#232830", "cterm": "237", "cterm16": "8" },
- \ "special_grey": { "gui": "#434d5c", "cterm": "238", "cterm16": "15" },
- \ "vertsplit": { "gui": "#434d5c", "cterm": "59", "cterm16": "15" }
+ \ "comment_grey": { "gui": "#4F676D", "cterm": "59", "cterm16": "15" },
+ \ "gutter_fg_grey": { "gui": "#4F676D", "cterm": "238", "cterm16": "15" },
+ \ "cursor_grey": { "gui": "#262C32", "cterm": "236", "cterm16": "8" },
+ \ "visual_grey": { "gui": "#2C343A", "cterm": "237", "cterm16": "15" },
+ \ "menu_grey": { "gui": "#171C20", "cterm": "237", "cterm16": "8" },
+ \ "special_grey": { "gui": "#2E3E46", "cterm": "238", "cterm16": "15" },
+ \ "vertsplit": { "gui": "#2E3E46", "cterm": "59", "cterm16": "15" }
  \}
 
 """ Mariana
@@ -244,6 +268,7 @@ if dein#load_state('~/.config/dein')
   call dein#add('qpkorr/vim-bufkill')
   call dein#add('SirVer/ultisnips')
   call dein#add('bronson/vim-trailing-whitespace')
+  call dein#add('carlitux/deoplete-ternjs')
 
   call dein#end()
   call dein#save_state()
@@ -279,6 +304,9 @@ let g:ale_python_pylint_change_directory = 0
 
 let g:indent_guides_enable_on_vim_startup = 0 " Indent guides
 let g:deoplete#enable_at_startup = 1 " Autocompletion
+let g:deoplete#sources#ternjs#filetypes = [
+                \ 'vue'
+                \ ]
 let g:jedi#completions_enabled = 0 " Disable vim-jedi completion
 let NERDTreeIgnore=['\.pyc$', '\~$', '__pycache__']
 let NERDTreeQuitOnOpen=1
@@ -431,7 +459,7 @@ let g:lightline = {
   \             [ 'fugitive', 'filename', 'modified' ] ],
   \   'right': [ [ 'linter_checking', 'linter_errors',
   \                'linter_warnings', 'lineinfo' ],
-  \              [ 'fileformat', 'fileencoding', 'filetype' ] ]
+  \              [ 'filetype' ] ]
   \ },
   \ 'tab': {
   \   'active': [ 'filename', 'modified' ],
@@ -511,7 +539,7 @@ function! LightlineFugitive()
 endfunction
 
 function! LightlineFilename()
-  let fname = expand('%:t')
+  let fname = expand('%')
   return fname == '__Tagbar__' ? g:lightline.fname :
         \ fname =~ '__Gundo\|NERD_tree' ? '' :
         \ &ft == 'vimfiler' ? vimfiler#get_status_string() :
