@@ -2,7 +2,7 @@
 " dein: https://github.com/Shougo/dein.vim
 " universal-ctags: https://github.com/universal-ctags/ctags
 " ccls: https://github.com/MaskRay/ccls
-" :CocInstall coc-css coc-vetur coc-ultisnips
+" :CocInstall coc-css coc-highlight coc-vetur coc-ultisnips
 
 " Hotkeys:
 " Ctrl+] - Go to definition
@@ -37,15 +37,15 @@ if dein#load_state('~/.cache/dein')
   call dein#add('jsfaint/coc-neoinclude')
   call dein#add('neoclide/coc.nvim', { 'build': 'yarn install', 'rev': 'v0.0.55' })
   call dein#add('scrooloose/nerdcommenter')
+  call dein#add('liuchengxu/vista.vim') " Like tagbar, but for CoC
 
   " UI
-  " call dein#add('scrooloose/nerdtree')
   call dein#add('Shougo/vimfiler.vim')
   call dein#add('majutsushi/tagbar')
-  call dein#add('nathanaelkane/vim-indent-guides')
   call dein#add('Yggdroot/indentLine')
   call dein#add('junegunn/fzf', { 'build': './install --all', 'merged': 0 })
   call dein#add('junegunn/fzf.vim', { 'depends': 'fzf' })
+  call dein#add('zezic/vim-trailing-whitespace', { 'merged': 0 })
 
   " Operations
   call dein#add('tpope/vim-surround')
@@ -64,10 +64,8 @@ if dein#load_state('~/.cache/dein')
   call dein#add('bfrg/vim-cpp-modern', { 'merged': 0 })
 
   " CSS
-  call dein#add('ap/vim-css-color')
-  " call dein#add('hail2u/vim-css3-syntax')
-  call dein#add('zezic/scss-syntax.vim', { 'merged': 0 })
-  " call dein#add('tpope/vim-haml')
+  " call dein#add('ap/vim-css-color')
+  call dein#add('cakebaker/scss-syntax.vim')
 
   " JS
   call dein#add('pangloss/vim-javascript')
@@ -79,17 +77,14 @@ if dein#load_state('~/.cache/dein')
   " Python
   call dein#add('zchee/deoplete-jedi')
   call dein#add('davidhalter/jedi-vim')
+  call dein#add('zezic/python-syntax')
 
   " Pug
   call dein#add('zezic/vim-pug', { 'merged': 0, 'rev': 'before-broken-dashes' })
 
   " Vue
   call dein#add('zezic/vim-vue', { 'merged': 0 })
-  " call dein#add('zezic/python-syntax')
-  " call dein#add('Vimjas/vim-python-pep8-indent')
-  " call dein#add('qpkorr/vim-bufkill')
   call dein#add('SirVer/ultisnips')
-  " call dein#add('bronson/vim-trailing-whitespace')
 
   call dein#end()
   call dein#save_state()
@@ -107,7 +102,6 @@ if dein#check_install()
 endif
 
 " Look & Feel
-let g:indent_guides_enable_on_vim_startup = 0 " Indent guides
 set termguicolors
 colorscheme onedark
 set nu
@@ -131,6 +125,7 @@ set scrolloff=2
 
 " Hotkeys
 nmap <C-t> :TagbarToggle<CR><C-W>l
+nmap <A-o> :Vista!!<CR>
 nnoremap <F5> :GundoToggle<CR>
 " map <C-\> :NERDTreeToggle<CR>
 map <C-_> :call NERDComment(1, 'toggle')<CR>
@@ -155,8 +150,8 @@ map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans
 \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 let g:UltiSnipsExpandTrigger="<tab>"
 " Use `[c` and `]c` for navigate diagnostics
-nmap <silent> [c <Plug>(coc-diagnostic-prev)
-nmap <silent> ]c <Plug>(coc-diagnostic-next)
+nmap <silent> <C-[> <Plug>(coc-diagnostic-prev)
+nmap <silent> <C-]> <Plug>(coc-diagnostic-next)
 " Remap keys for gotos
 nmap <silent> <Leader>g <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
@@ -172,11 +167,17 @@ set completeopt-=preview " Disable docs window
 let g:jedi#completions_enabled = 0 " Disable vim-jedi completion
 autocmd BufWinEnter '__doc__' setlocal bufhidden=delete " Don't show Jedi docs
 
+" Gutentags
+let g:gutentags_ctags_exclude = ["*.min.js", "*.min.css", "build", "vendor", ".git", "node_modules", ".nuxt", "*.vim/bundle/*"]
+
 " Lightline
 source ~/.config/nvim/init-lightline.vim
 
 " NERDTree
 " source ~/.config/nvim/init-nerdtree.vim
+
+" NERDCommenter
+let NERDSpaceDelims = 1
 
 " Customize fzf colors to match your color scheme
 let g:fzf_colors =
@@ -194,6 +195,13 @@ let g:fzf_colors =
   \ 'spinner': ['fg', 'Label'],
   \ 'header':  ['fg', 'Comment'] }
 
+" Gitgutter
+let g:gitgutter_sign_added = '▎'
+let g:gitgutter_sign_modified = '▎'
+let g:gitgutter_sign_removed = ''
+let g:gitgutter_sign_removed_first_line = ''
+let g:gitgutter_sign_modified_removed = '▎'
+
 " Multicursors
 let g:multi_cursor_exit_from_visual_mode = 0
 let g:multi_cursor_exit_from_insert_mode = 0
@@ -203,6 +211,26 @@ let g:multi_cursor_next_key            = '<C-n>'
 let g:multi_cursor_prev_key            = '<C-p>'
 let g:multi_cursor_skip_key            = '<C-s>'
 let g:multi_cursor_quit_key            = '<Esc>'
+
+" Tagbar
+let g:tagbar_type_scss = {
+\ 'ctagstype' : 'scss',
+    \ 'kinds'     : [
+        \ 'c:Class',
+        \ 's:Selector',
+        \ 'm:Mixin',
+        \ 'd:Media',
+        \ 'v:Variable',
+        \ 'i:Identity'
+    \ ]
+\ }
+
+" Whitespace
+let g:extra_whitespace_ignored_filetypes = ['vimfiler']
+
+" Vista
+let g:vista_sidebar_width = 35
+let g:vista_default_executive = 'coc'
 
 " C++
 let g:ale_c_parse_compile_commands = 1
@@ -218,7 +246,7 @@ let g:ale_python_pylint_use_global = 0
 let g:ale_python_pylint_change_directory = 0
 
 " SASS
-autocmd FileType scss set iskeyword+=-
+" autocmd FileType scss set iskeyword+=-
 
 " Vue
 autocmd FileType vue syntax sync fromstart " Fix Vue highlighting
