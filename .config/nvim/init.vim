@@ -2,7 +2,7 @@
 " dein: https://github.com/Shougo/dein.vim
 " universal-ctags: https://github.com/universal-ctags/ctags
 " ccls: https://github.com/MaskRay/ccls
-" :CocInstall coc-css coc-highlight coc-vetur coc-ultisnips
+" :CocInstall coc-css coc-vetur coc-ultisnips
 
 " Hotkeys:
 " Ctrl+] - Go to definition
@@ -40,8 +40,10 @@ if dein#load_state('~/.cache/dein')
   call dein#add('liuchengxu/vista.vim') " Like tagbar, but for CoC
 
   " UI
-  call dein#add('Shougo/vimfiler.vim')
-  call dein#add('majutsushi/tagbar')
+  " call dein#add('Shougo/vimfiler.vim')
+  call dein#add('zezic/vimfiler.vim', { 'merged': 0 })
+  " call dein#add('majutsushi/tagbar')
+  call dein#add('zezic/tagbar', { 'merged': 0 })
   call dein#add('Yggdroot/indentLine')
   call dein#add('junegunn/fzf', { 'build': './install --all', 'merged': 0 })
   call dein#add('junegunn/fzf.vim', { 'depends': 'fzf' })
@@ -64,7 +66,7 @@ if dein#load_state('~/.cache/dein')
   call dein#add('bfrg/vim-cpp-modern', { 'merged': 0 })
 
   " CSS
-  " call dein#add('ap/vim-css-color')
+  call dein#add('ap/vim-css-color')
   call dein#add('cakebaker/scss-syntax.vim')
 
   " JS
@@ -112,6 +114,7 @@ let g:indentLine_color_gui = onedark#GetColors().cursor_grey.gui
 let g:indentLine_char = '│'
 let g:indentLine_first_char = '│'
 let g:indentLine_showFirstIndentLevel = 1
+let g:indentLine_fileTypeExclude = ['tagbar', 'vimfiler']
 
 " Behaviour
 set mouse=a
@@ -250,3 +253,22 @@ let g:ale_python_pylint_change_directory = 0
 
 " Vue
 autocmd FileType vue syntax sync fromstart " Fix Vue highlighting
+
+" Tagbar
+autocmd FileType tagbar set fcs=eob:\ 
+let g:tagbar_iconchars = ['◆', '◇']
+let g:tagbar_visibility_symbols = {
+    \ 'public'    : '•',
+    \ 'protected' : '-',
+    \ 'private'   : '×'
+\ }
+
+" Vimfiler
+autocmd FileType vimfiler setlocal nonumber
+autocmd FileType vimfiler setlocal nornu
+autocmd FileType vimfiler set fcs=eob:\ 
+let g:vimfiler_tree_leaf_icon = ''
+let g:vimfiler_file_icon = '•'
+let g:vimfiler_tree_closed_icon = '◆'
+let g:vimfiler_tree_opened_icon = '◇'
+let g:vimfiler_readonly_file_icon = '×'

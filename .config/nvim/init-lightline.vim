@@ -6,6 +6,13 @@ let g:lightline = {
   \                'linter_warnings', 'lineinfo' ],
   \              [ 'filetype' ] ]
   \ },
+  \ 'inactive': {
+  \   'left': [ [ 'mode', 'paste' ],
+  \             [ 'fugitive', 'filename', 'modified' ] ],
+  \   'right': [ [ 'linter_checking', 'linter_errors',
+  \                'linter_warnings', 'lineinfo' ],
+  \              [ 'filetype' ] ]
+  \ },
   \ 'tab': {
   \   'active': [ 'filename', 'modified' ],
   \   'inactive': [ 'filename', 'modified' ]
@@ -16,6 +23,7 @@ let g:lightline = {
   \ 'component_function': {
   \   'fugitive': 'LightlineFugitive',
   \   'filename': 'LightlineFilename',
+  \   'lineinfo': 'LightlineLineInfo',
   \   'mode': 'LightlineMode',
   \   'fileformat': 'LightlineFileformat',
   \   'filetype': 'LightlineFiletype',
@@ -26,7 +34,8 @@ let g:lightline = {
   \   'linter_checking': 'lightline#ale#checking',
   \   'linter_warnings': 'lightline#ale#warnings',
   \   'linter_errors': 'lightline#ale#errors',
-  \   'linter_ok': 'lightline#ale#ok'
+  \   'linter_ok': 'lightline#ale#ok',
+  \   'mylineinfo': 'LightlineLineInfo'
   \ },
   \ 'component_visible_condition': {
   \   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())'
@@ -46,6 +55,13 @@ let g:lightline = {
 
 let s:m = { '__Tagbar__': 'Tagbar', '__Gundo__': 'Gundo', '__Gundo_Preview__': 'Gundo Preview', '[Command Line]': 'Command Line'}
 let s:p = {}
+
+function! LightlineLineInfo()
+  if &filetype == 'vimfiler' || &filetype == 'tagbar'
+    return ''
+  endif
+  return printf('%d:%-2d', line('.'), col('.'))
+endfunction
 
 function! LightlineTabFilename(n) abort
   let bufnr = tabpagebuflist(a:n)[tabpagewinnr(a:n) - 1]
@@ -84,8 +100,7 @@ endfunction
 
 function! LightlineFilename()
   let fname = expand('%')
-  return fname == '__Tagbar__' ? g:lightline.fname :
-        \ fname =~ '__Gundo\|NERD_tree' ? '' :
+  return &ft == 'tagbar' ? g:lightline.fname :
         \ &ft == 'vimfiler' ? vimfiler#get_status_string() :
         \ &ft == 'unite' ? unite#get_status_string() :
         \ &ft == 'vimshell' ? vimshell#get_status_string() :
