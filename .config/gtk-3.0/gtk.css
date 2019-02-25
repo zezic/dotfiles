@@ -1,26 +1,33 @@
-VteTerminal, vte-terminal {
-  padding: 24px;
+VteTerminal,
+TerminalScreen,
+vte-terminal {
+    padding: 4px 12px 10px 12px;
+    -VteTerminal-inner-border: 4px 12px 10px 12px;
+}
+.mate-panel-menu-bar menuitem {
+    /* padding: 0 4px; */
+    font-size: 14px;
+    color: white;
+}
+.mate-panel-menu-bar menu > menuitem {
+  color: #222222;
+}
+.mate-panel-menu-bar.horizontal #clock-applet-button label {
+    /* padding: 0 4px; */
+    font-size: 14px;
+    color: white;
 }
 
-
-/* .-vala-panel-appmenu-private > * > GtkLabel, .-vala-panel-appmenu-private > * > GtkWidget > * { */
-.-vala-panel-appmenu-private > * > GtkLabel,
-.-vala-panel-appmenu-private > * > *  > GtkLabel {
-	font-weight: normal;
-	padding: 0 4px 0 2px;
-  font-size: 10.5px;
-  /*background-color: red;*/
+PanelSeparator {
+  color: rgba(255, 255, 255, 0.0);
+}
+MatePanelAppletFrameDBus {
+  border-style: solid;
+  border-color: rgba(255, 255, 255, 0.0);
 }
 
-.-vala-panel-appmenu-private:nth-child(1) > * > GtkLabel {
-	/*font-style: italic;*/
-  font-weight: 900;
+/* Caja Address Bar button */
+.caja-navigation-window grid.vertical paned.horizontal box.vertical paned.horizontal box.vertical box.horizontal .image-button.toggle:first-child {
+  box-shadow: none;
+  background-color: transparent;
 }
-
-.-vala-panel-appmenu-private > * > GtkLabel {
-  font-size: 10.5px;
-}
-
-/*
-	color: #fcfcfc;
-*/
