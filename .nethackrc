@@ -1,0 +1,2 @@
+OPTIONS=symset:curses,windowtype:curses,petattr:t,use_darkgray,popup_dialog
+SYMBOLS=S_darkroom:\xfe,S_corr:\xfe
